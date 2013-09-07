@@ -14,14 +14,14 @@ import model.invoice_quaries;
 
 /**
  *
- * @author AT
+ * @author Naveen
  */
-public class Invoice extends javax.swing.JFrame {
+public class invoice1 extends javax.swing.JFrame {
 
     /**
-     * Creates new form Invoice1
+     * Creates new form invoice1
      */
-    public Invoice() {
+    public invoice1() {
         initComponents();
     }
 
@@ -34,6 +34,7 @@ public class Invoice extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLayeredPane1 = new javax.swing.JLayeredPane();
         txt_item = new javax.swing.JTextField();
         combo_item = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -43,7 +44,6 @@ public class Invoice extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        getContentPane().setLayout(null);
 
         txt_item.setBackground(new java.awt.Color(246, 246, 246));
         txt_item.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -58,8 +58,8 @@ public class Invoice extends javax.swing.JFrame {
                 txt_itemKeyReleased(evt);
             }
         });
-        getContentPane().add(txt_item);
-        txt_item.setBounds(370, 130, 180, 30);
+        txt_item.setBounds(360, 130, 240, 30);
+        jLayeredPane1.add(txt_item, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         combo_item.setBackground(new java.awt.Color(246, 246, 246));
         combo_item.setEditable(true);
@@ -73,8 +73,8 @@ public class Invoice extends javax.swing.JFrame {
                 combo_itemActionPerformed(evt);
             }
         });
-        getContentPane().add(combo_item);
-        combo_item.setBounds(370, 130, 180, 30);
+        combo_item.setBounds(360, 130, 240, 30);
+        jLayeredPane1.add(combo_item, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jTable1.setBackground(new java.awt.Color(246, 246, 246));
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -88,8 +88,8 @@ public class Invoice extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(290, 210, 780, 400);
+        jScrollPane1.setBounds(300, 197, 770, 450);
+        jLayeredPane1.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txt_qty.setBackground(new java.awt.Color(246, 246, 246));
         txt_qty.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -98,16 +98,62 @@ public class Invoice extends javax.swing.JFrame {
                 txt_qtyKeyPressed(evt);
             }
         });
-        getContentPane().add(txt_qty);
-        txt_qty.setBounds(870, 130, 180, 30);
+        txt_qty.setBounds(850, 130, 210, 30);
+        jLayeredPane1.add(txt_qty, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/invoice.png"))); // NOI18N
-        getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 1366, 768);
+        jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txt_itemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_itemKeyPressed
+        focus.textFieldsNext(evt, combo_item, null);
+    }//GEN-LAST:event_txt_itemKeyPressed
+
+    private void txt_itemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_itemKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_itemKeyTyped
+
+    private void txt_itemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_itemKeyReleased
+        try {
+            String field = txt_item.getText();
+            ResultSet rs = invoice_quaries.invoiceSeach(field);
+            while (rs.next()) {
+
+                Vector v = new Vector();
+                v.add(rs.getString("pro_name"));
+                combo_item.setModel(new DefaultComboBoxModel(v));
+                combo_item.setPopupVisible(true);
+
+            }
+
+            if (txt_item.getText().isEmpty()) {
+                combo_item.setModel(new DefaultComboBoxModel());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_itemKeyReleased
 
     private void combo_itemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combo_itemMouseClicked
 
@@ -138,39 +184,7 @@ public class Invoice extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
-
     }//GEN-LAST:event_txt_qtyKeyPressed
-
-    private void txt_itemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_itemKeyPressed
-        focus.textFieldsNext(evt, combo_item, null);
-    }//GEN-LAST:event_txt_itemKeyPressed
-
-    private void txt_itemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_itemKeyReleased
-        try {
-            String field = txt_item.getText();
-            ResultSet rs = invoice_quaries.invoiceSeach(field);
-            while (rs.next()) {
-
-                Vector v = new Vector();
-                v.add(rs.getString("pro_name"));
-                combo_item.setModel(new DefaultComboBoxModel(v));
-                combo_item.setPopupVisible(true);
-
-            }
-
-            if (txt_item.getText().isEmpty()) {
-                combo_item.setModel(new DefaultComboBoxModel());
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_itemKeyReleased
-
-    private void txt_itemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_itemKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_itemKeyTyped
 
     /**
      * @param args the command line arguments
@@ -189,21 +203,21 @@ public class Invoice extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Invoice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(invoice1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Invoice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(invoice1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Invoice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(invoice1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Invoice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(invoice1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                new Invoice1().setVisible(true);
-                Invoice in=new Invoice();
+               // new invoice1().setVisible(true);
+                invoice1 in=new invoice1();
                 AWTUtilities.setWindowOpaque(in, false);
                 in.setVisible(true);
             }
@@ -212,6 +226,7 @@ public class Invoice extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox combo_item;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txt_item;
