@@ -198,16 +198,18 @@ public class userssearch extends javax.swing.JFrame {
 
     private void txtnicKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnicKeyPressed
         try {
-            quaries.searchusers("uses", null, null);
+            quaries.searchusers("users", null, null);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_txtnicKeyPressed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         try {
             String idnic =txtnic.getText();
-             ResultSet rs = quaries.searchusers(idnic, idnic, idnic);
+             ResultSet rs = quaries.searchusers("", idnic, idnic);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 

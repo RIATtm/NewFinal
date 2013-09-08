@@ -4,11 +4,13 @@
  */
 package view;
 
+import com.sun.awt.AWTUtilities;
 import java.awt.Image;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import model.quaries;
 
 /**
  *
@@ -43,9 +45,11 @@ public class addUser extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         image = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         txtnic.setBackground(new java.awt.Color(247, 247, 247));
         txtnic.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -127,6 +131,15 @@ public class addUser extends javax.swing.JFrame {
         });
         jButton2.setBounds(880, 500, 130, 30);
         jLayeredPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.setBounds(690, 590, 110, 40);
+        jLayeredPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add_user_1.png"))); // NOI18N
         jLabel1.setBounds(0, 0, 1366, 768);
@@ -234,6 +247,27 @@ public class addUser extends javax.swing.JFrame {
                 e.printStackTrace();
             }
     }//GEN-LAST:event_jButton2ActionPerformed
+String m=" ";
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+
+            if (jbm.isSelected()) {
+                m = jbm.getText();
+            } else if (jbf.isSelected()) {
+                m = jbf.getText();
+
+            }
+            String[] name = ttname.getText().split(" ");
+            String feild[] = {txtnic.getText(), name[0], name[1], m, txtmobile.getText(
+            ), txthome.getText(), txtaddress.getText(), jpath, "fdsf", "dfsd", "dsds"};
+            quaries.autosave("usertype", feild);
+
+            //        String[] ar={"123","123","123","123","123","123","123","123","123","123","123"};
+            //        quaries.autosave("usertype", ar);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,12 +299,15 @@ public class addUser extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new addUser().setVisible(true);
+                addUser add = new addUser();
+                AWTUtilities.setWindowOpaque(add, false);
+                add.setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel image;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
