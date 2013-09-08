@@ -129,7 +129,7 @@ public class supplieradd extends javax.swing.JFrame {
         txtcomname.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         getContentPane().add(txtcomname, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 520, 190, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/supplier-Recovered.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/supplier-Recovered.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
 
         pack();
