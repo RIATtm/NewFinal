@@ -38,6 +38,14 @@ public class controlPanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        changeUserName = new javax.swing.JLayeredPane();
+        jDesktopPane2 = new javax.swing.JDesktopPane();
+        image1 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        txt_userName = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        changePassword = new javax.swing.JLayeredPane();
+        ControlPanel = new javax.swing.JLayeredPane();
         UserAccounts = new javax.swing.JLayeredPane();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         image = new javax.swing.JLabel();
@@ -48,14 +56,32 @@ public class controlPanel extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        ControlPanel = new javax.swing.JLayeredPane();
-        changeUserName = new javax.swing.JLayeredPane();
-        jLayeredPane3 = new javax.swing.JLayeredPane();
-        jDesktopPane2 = new javax.swing.JDesktopPane();
-        image1 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        txt_userName = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+
+        image1.setBounds(0, 0, 220, 200);
+        jDesktopPane2.add(image1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jDesktopPane2.setBounds(830, 200, 220, 200);
+        changeUserName.add(jDesktopPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/done_d.png"))); // NOI18N
+        jButton6.setContentAreaFilled(false);
+        jButton6.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/doneg1.png"))); // NOI18N
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jButton6.setBounds(440, 280, 250, 90);
+        changeUserName.add(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        txt_userName.setBounds(230, 210, 450, 30);
+        changeUserName.add(txt_userName, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userNameChange.png"))); // NOI18N
+        jLabel2.setBounds(0, 0, 1366, 768);
+        changeUserName.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         image.setBounds(80, 0, 140, 150);
         jDesktopPane1.add(image, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -105,37 +131,8 @@ public class controlPanel extends javax.swing.JFrame {
         jLabel1.setBounds(0, 0, 1366, 768);
         UserAccounts.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-
-        image1.setBounds(0, 0, 220, 200);
-        jDesktopPane2.add(image1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jDesktopPane2.setBounds(830, 200, 220, 200);
-        jLayeredPane3.add(jDesktopPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/done_d.png"))); // NOI18N
-        jButton6.setContentAreaFilled(false);
-        jButton6.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/doneg1.png"))); // NOI18N
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        jButton6.setBounds(440, 280, 250, 90);
-        jLayeredPane3.add(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        txt_userName.setBounds(230, 210, 450, 30);
-        jLayeredPane3.add(txt_userName, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userNameChange.png"))); // NOI18N
-        jLabel2.setBounds(0, 0, 1366, 768);
-        jLayeredPane3.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLayeredPane3.setBounds(0, 0, 1366, 768);
-        changeUserName.add(jLayeredPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        changeUserName.setBounds(0, 0, 1366, 768);
-        ControlPanel.add(changeUserName, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        UserAccounts.setBounds(0, 0, 1366, 768);
+        ControlPanel.add(UserAccounts, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -207,6 +204,7 @@ public class controlPanel extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane ControlPanel;
     private javax.swing.JLayeredPane UserAccounts;
+    private javax.swing.JLayeredPane changePassword;
     private javax.swing.JLayeredPane changeUserName;
     private javax.swing.JLabel image;
     private javax.swing.JLabel image1;
@@ -220,7 +218,6 @@ public class controlPanel extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JLabel txt_userName;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
