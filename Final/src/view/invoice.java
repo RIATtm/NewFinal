@@ -13,6 +13,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import model.invoice_quaries;
@@ -46,7 +48,10 @@ public class invoice extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         txt_qty = new javax.swing.JTextField();
         txt_waiterno = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        com_invoicewaiter = new javax.swing.JComboBox();
+        txt_grandTotal = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -64,11 +69,12 @@ public class invoice extends javax.swing.JFrame {
                 txt_itemKeyTyped(evt);
             }
         });
-        txt_item.setBounds(240, 130, 240, 30);
+        txt_item.setBounds(240, 190, 240, 30);
         jLayeredPane1.add(txt_item, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         combo_item.setBackground(new java.awt.Color(246, 246, 246));
         combo_item.setEditable(true);
+        combo_item.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         combo_item.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 combo_itemMouseClicked(evt);
@@ -79,7 +85,7 @@ public class invoice extends javax.swing.JFrame {
                 combo_itemActionPerformed(evt);
             }
         });
-        combo_item.setBounds(240, 130, 240, 30);
+        combo_item.setBounds(240, 190, 240, 30);
         jLayeredPane1.add(combo_item, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jTable1.setBackground(new java.awt.Color(246, 246, 246));
@@ -89,12 +95,12 @@ public class invoice extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Item ID", "Item", "Quantity", "Price", "Total"
+                "No", "Item ID", "Item", "Quantity", "Price", "Total"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jScrollPane1.setBounds(220, 210, 830, 450);
+        jScrollPane1.setBounds(260, 250, 830, 450);
         jLayeredPane1.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txt_qty.setBackground(new java.awt.Color(246, 246, 246));
@@ -104,22 +110,60 @@ public class invoice extends javax.swing.JFrame {
                 txt_qtyKeyPressed(evt);
             }
         });
-        txt_qty.setBounds(980, 130, 210, 30);
+        txt_qty.setBounds(620, 190, 210, 30);
         jLayeredPane1.add(txt_qty, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txt_waiterno.setBackground(new java.awt.Color(246, 246, 246));
         txt_waiterno.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txt_waiterno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_waiternoActionPerformed(evt);
+            }
+        });
         txt_waiterno.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_waiternoKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_waiternoKeyReleased(evt);
+            }
         });
-        txt_waiterno.setBounds(630, 130, 210, 30);
+        txt_waiterno.setBounds(470, 130, 200, 30);
         jLayeredPane1.add(txt_waiterno, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/invoice.png"))); // NOI18N
-        jLabel1.setBounds(0, 0, 1366, 768);
-        jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        com_invoicewaiter.setBackground(new java.awt.Color(246, 246, 246));
+        com_invoicewaiter.setEditable(true);
+        com_invoicewaiter.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        com_invoicewaiter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                com_invoicewaiterActionPerformed(evt);
+            }
+        });
+        com_invoicewaiter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                com_invoicewaiterKeyReleased(evt);
+            }
+        });
+        com_invoicewaiter.setBounds(470, 130, 200, 30);
+        jLayeredPane1.add(com_invoicewaiter, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        txt_grandTotal.setBackground(new java.awt.Color(246, 246, 246));
+        txt_grandTotal.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txt_grandTotal.setBounds(1000, 190, 180, 30);
+        jLayeredPane1.add(txt_grandTotal, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton1.setText("Genarate");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.setBounds(1103, 540, 80, 40);
+        jLayeredPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/invoice.png"))); // NOI18N
+        jLabel2.setBounds(0, 0, 1366, 770);
+        jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,13 +208,13 @@ public class invoice extends javax.swing.JFrame {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-        
+
         try {
-            String s = txt_item.getText();
-           ResultSet rs =  DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM product WHERE pro_name LIKE '" + txt_item.getText() + "%'");
+            String field = txt_item.getText();
+            ResultSet rs = invoice_quaries.invoiceSeach(field);
             Vector v = new Vector();
             while (rs.next()) {
-                v.add(rs.getString(1));
+                v.add(rs.getString(2));
             }
             combo_item.setModel(new DefaultComboBoxModel(v));
             combo_item.showPopup();
@@ -179,7 +223,7 @@ public class invoice extends javax.swing.JFrame {
                 combo_item.showPopup();
 
             }
-           
+
 
 
         } catch (Exception e) {
@@ -192,7 +236,6 @@ public class invoice extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_itemKeyTyped
 
     private void combo_itemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combo_itemMouseClicked
-
     }//GEN-LAST:event_combo_itemMouseClicked
 
     private void combo_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_itemActionPerformed
@@ -201,30 +244,88 @@ public class invoice extends javax.swing.JFrame {
 
     private void txt_qtyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_qtyKeyPressed
         DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+        int i = dt.getRowCount();
+        i++;
         focus.textFieldsNext(evt, null, combo_item);
         if (evt.getKeyCode() == evt.VK_ENTER) {
 
             try {
                 String field1 = txt_item.getText();
                 ResultSet rs = invoice_quaries.invoiceTable(field1);
+                Vector v = new Vector();
                 while (rs.next()) {
-
-                    Vector v = new Vector();
+                    v.add(i);
                     v.add(rs.getString(1));
                     v.add(rs.getString(2));
                     v.add(txt_qty.getText());
-                    v.add(rs.getString(4));
+                    v.add(rs.getString(3));
+                    //-----------------------calculating total------------------
+                    int getQty = Integer.parseInt(txt_qty.getText());
+                    double price = Double.parseDouble(rs.getString(3));
+                    double total = getQty * price;
+                    //----------------------------------------------------------
+                    v.add(total);
                     dt.addRow(v);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            double tot = 0;
+            for (int a = 0; a < dt.getRowCount(); a++) {
+                if (!(dt.getValueAt(a, 5).equals(null))) {
+                    double cellTot = Double.parseDouble(dt.getValueAt(a, 5).toString());
+                    tot += cellTot;
+                    txt_grandTotal.setText(tot + "");
+                }
+            }
         }
     }//GEN-LAST:event_txt_qtyKeyPressed
 
     private void txt_waiternoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_waiternoKeyPressed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txt_waiternoKeyPressed
+
+    private void txt_waiternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_waiternoActionPerformed
+        txt_waiterno.setText(com_invoicewaiter.getSelectedItem().toString());
+    }//GEN-LAST:event_txt_waiternoActionPerformed
+
+    private void txt_waiternoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_waiternoKeyReleased
+        try {
+            String field2 = txt_waiterno.getText();
+            ResultSet rs = invoice_quaries.invoiceWaiter(field2);
+            Vector v = new Vector();
+            while (rs.next()) {
+
+                v.add(rs.getString(1));
+            }
+            com_invoicewaiter.setModel(new DefaultComboBoxModel(v));
+            com_invoicewaiter.showPopup();
+            if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
+                com_invoicewaiter.grabFocus();
+                com_invoicewaiter.showPopup();
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_txt_waiternoKeyReleased
+
+    private void com_invoicewaiterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_com_invoicewaiterKeyReleased
+
+    }//GEN-LAST:event_com_invoicewaiterKeyReleased
+
+    private void com_invoicewaiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_com_invoicewaiterActionPerformed
+        txt_waiterno.setText("W"+com_invoicewaiter.getSelectedItem().toString());
+    }//GEN-LAST:event_com_invoicewaiterActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String field3[] = {"2", txt_waiterno.getText(), txt_grandTotal.getText(), " 3 "};
+        try {
+            invoice_quaries.invoiceaddDb(field3);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,19 +358,22 @@ public class invoice extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 //                new invoice().setVisible(true);
-                invoice  in=new invoice();
+                invoice in = new invoice();
                 AWTUtilities.setWindowOpaque(in, false);
                 in.setVisible(true);
             }
         });
-        
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox com_invoicewaiter;
     private javax.swing.JComboBox combo_item;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txt_grandTotal;
     private javax.swing.JTextField txt_item;
     private javax.swing.JTextField txt_qty;
     private javax.swing.JTextField txt_waiterno;
