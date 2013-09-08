@@ -174,7 +174,7 @@ public class addUser extends javax.swing.JFrame {
             //-----------------------------
             File ff = new File(path);
             Image img = ImageIO.read(ff);
-            img = img.getScaledInstance(jDesktopPane1.getWidth(), jDesktopPane1.getHeight(), Image.SCALE_SMOOTH);
+            img = img.getScaledInstance(image.getWidth(), image.getHeight(), Image.SCALE_SMOOTH);
             image.setIcon(new ImageIcon(img));
 
         } catch (Exception e) {
