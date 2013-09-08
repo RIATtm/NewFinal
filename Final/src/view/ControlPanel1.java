@@ -6,26 +6,18 @@ package view;
 
 import com.sun.awt.AWTUtilities;
 import control.DBConnection;
-import java.awt.Image;
-import java.io.File;
-import java.sql.ResultSet;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Naveen
  */
-public class controlPanel extends javax.swing.JFrame {
-
-    String user = "Naveen";
+public class ControlPanel1 extends javax.swing.JFrame {
 
     /**
-     * Creates new form controlPanel
+     * Creates new form ControlPanel1
      */
-    public controlPanel() {
+    public ControlPanel1() {
         initComponents();
     }
 
@@ -38,13 +30,7 @@ public class controlPanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ControlPanel = new javax.swing.JLayeredPane();
-        changeUserName = new javax.swing.JLayeredPane();
-        jDesktopPane2 = new javax.swing.JDesktopPane();
-        image1 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        txt_userName = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        changePassword = new javax.swing.JLayeredPane();
         UserAccounts = new javax.swing.JLayeredPane();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         image = new javax.swing.JLabel();
@@ -55,36 +41,13 @@ public class controlPanel extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        changePassword = new javax.swing.JLayeredPane();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-
-        image1.setBounds(0, 0, 220, 200);
-        jDesktopPane2.add(image1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jDesktopPane2.setBounds(830, 200, 220, 200);
-        changeUserName.add(jDesktopPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/done_d.png"))); // NOI18N
-        jButton6.setContentAreaFilled(false);
-        jButton6.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/doneg1.png"))); // NOI18N
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        jButton6.setBounds(440, 280, 250, 90);
-        changeUserName.add(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        txt_userName.setBounds(230, 210, 450, 30);
-        changeUserName.add(txt_userName, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userNameChange.png"))); // NOI18N
-        jLabel2.setBounds(0, 0, 1366, 768);
-        changeUserName.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        changeUserName.setBounds(0, 0, 1366, 768);
-        ControlPanel.add(changeUserName, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        ControlPanel = new javax.swing.JLayeredPane();
+        changeUserName = new javax.swing.JLayeredPane();
+        jDesktopPane2 = new javax.swing.JDesktopPane();
+        image1 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        txt_userName = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         image.setBounds(0, 0, 220, 200);
         jDesktopPane1.add(image, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -134,10 +97,32 @@ public class controlPanel extends javax.swing.JFrame {
         jLabel1.setBounds(0, 0, 1366, 768);
         UserAccounts.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        UserAccounts.setBounds(0, 0, 1366, 768);
-        ControlPanel.add(UserAccounts, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        changePassword.setBounds(0, 0, 1366, 768);
-        ControlPanel.add(changePassword, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+
+        image1.setBounds(0, 0, 220, 200);
+        jDesktopPane2.add(image1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jDesktopPane2.setBounds(830, 200, 220, 200);
+        changeUserName.add(jDesktopPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton6.setContentAreaFilled(false);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jButton6.setBounds(440, 280, 250, 90);
+        changeUserName.add(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        txt_userName.setBounds(230, 210, 450, 30);
+        changeUserName.add(txt_userName, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userNameChange.png"))); // NOI18N
+        jLabel2.setBounds(0, 0, 1366, 768);
+        changeUserName.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        changeUserName.setBounds(0, 0, 1366, 768);
+        ControlPanel.add(changeUserName, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,11 +136,8 @@ public class controlPanel extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         String username = null;//current userName
@@ -168,6 +150,10 @@ public class controlPanel extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,23 +172,23 @@ public class controlPanel extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(controlPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ControlPanel1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(controlPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ControlPanel1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(controlPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ControlPanel1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(controlPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ControlPanel1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new controlPanel().setVisible(true);
-                controlPanel in = new controlPanel();
-                AWTUtilities.setWindowOpaque(in, false);
-                in.setVisible(true);
+                //new ControlPanel1().setVisible(true);
+                ControlPanel1 cp=new ControlPanel1();
+                AWTUtilities.setWindowOpaque(cp, false);
+                cp.setVisible(true);
             }
         });
     }
@@ -226,27 +212,5 @@ public class controlPanel extends javax.swing.JFrame {
     private javax.swing.JLabel txt_userName;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
-    String jpath;
 
-    public void search() {
-        try {
-            ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM login WHERE username='" + user + "'");
-            while (rs.next()) {
-                username.setText(rs.getString("username"));
-                //-------------FILE CHOOSER-------------------------------------
-                JFileChooser jf = new JFileChooser();
-                jf.showOpenDialog(this);
-                File f = jf.getSelectedFile();
-                String path = f.getAbsolutePath();
-                path = path.replace("\\", "/");
-                //-------------Showing the selected file------------------------
-                File ff = new File(path);
-                Image img = ImageIO.read(ff);
-                img = img.getScaledInstance(image.WIDTH, image.HEIGHT, Image.SCALE_SMOOTH);
-                image.setIcon(new ImageIcon(img));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
