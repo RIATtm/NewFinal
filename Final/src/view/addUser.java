@@ -4,18 +4,15 @@
  */
 package view;
 
-import com.sun.awt.AWTUtilities;
-import com.sun.org.apache.xml.internal.security.keys.content.SPKIData;
 import java.awt.Image;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import model.Queries;
 
 /**
  *
- * @author AT
+ * @author Naveen
  */
 public class addUser extends javax.swing.JFrame {
 
@@ -35,57 +32,20 @@ public class addUser extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        jFileChooser1 = new javax.swing.JFileChooser();
-        ttname = new javax.swing.JTextField();
-        txthome = new javax.swing.JTextField();
-        txtaddress = new javax.swing.JTextField();
-        txtmobile = new javax.swing.JTextField();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
         txtnic = new javax.swing.JTextField();
+        ttname = new javax.swing.JTextField();
         jbm = new javax.swing.JRadioButton();
         jbf = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        txtmobile = new javax.swing.JTextField();
+        txthome = new javax.swing.JTextField();
+        txtaddress = new javax.swing.JTextField();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         image = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        ttname.setBackground(new java.awt.Color(247, 247, 247));
-        ttname.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        ttname.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                ttnameKeyTyped(evt);
-            }
-        });
-        getContentPane().add(ttname, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, 190, 30));
-
-        txthome.setBackground(new java.awt.Color(247, 247, 247));
-        txthome.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        getContentPane().add(txthome, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 410, 190, 30));
-
-        txtaddress.setBackground(new java.awt.Color(247, 247, 247));
-        txtaddress.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        getContentPane().add(txtaddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, 190, 30));
-
-        txtmobile.setBackground(new java.awt.Color(247, 247, 247));
-        txtmobile.setText("+94");
-        txtmobile.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txtmobile.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtmobileKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtmobileKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtmobileKeyTyped(evt);
-            }
-        });
-        getContentPane().add(txtmobile, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 370, 190, 30));
 
         txtnic.setBackground(new java.awt.Color(247, 247, 247));
         txtnic.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -99,34 +59,65 @@ public class addUser extends javax.swing.JFrame {
                 txtnicKeyReleased(evt);
             }
         });
-        getContentPane().add(txtnic, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 190, 30));
+        txtnic.setBounds(320, 190, 360, 30);
+        jLayeredPane1.add(txtnic, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        ttname.setBackground(new java.awt.Color(247, 247, 247));
+        ttname.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        ttname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ttnameKeyTyped(evt);
+            }
+        });
+        ttname.setBounds(320, 230, 370, 30);
+        jLayeredPane1.add(ttname, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jbm.setBackground(new java.awt.Color(247, 247, 247));
-        buttonGroup1.add(jbm);
         jbm.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jbm.setForeground(new java.awt.Color(0, 177, 255));
         jbm.setText("Male");
-        getContentPane().add(jbm, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, -1, -1));
+        jbm.setBounds(340, 270, 55, 25);
+        jLayeredPane1.add(jbm, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jbf.setBackground(new java.awt.Color(247, 247, 247));
-        buttonGroup1.add(jbf);
         jbf.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jbf.setForeground(new java.awt.Color(0, 177, 255));
         jbf.setText("Female");
-        getContentPane().add(jbf, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, -1, -1));
+        jbf.setBounds(420, 270, 69, 25);
+        jLayeredPane1.add(jbf, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        txtmobile.setBackground(new java.awt.Color(247, 247, 247));
+        txtmobile.setText("+94");
+        txtmobile.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtmobile.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtmobileKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtmobileKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtmobileKeyReleased(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 570, 110, 40));
+        txtmobile.setBounds(330, 380, 22, 16);
+        jLayeredPane1.add(txtmobile, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        image.setBounds(0, 0, 240, 260);
+        txthome.setBackground(new java.awt.Color(247, 247, 247));
+        txthome.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txthome.setBounds(330, 410, 360, 30);
+        jLayeredPane1.add(txthome, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        txtaddress.setBackground(new java.awt.Color(247, 247, 247));
+        txtaddress.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtaddress.setBounds(320, 450, 360, 30);
+        jLayeredPane1.add(txtaddress, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        image.setBounds(20, 0, 250, 260);
         jDesktopPane1.add(image, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        getContentPane().add(jDesktopPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 190, 240, 260));
+        jDesktopPane1.setBounds(820, 200, 270, 260);
+        jLayeredPane1.add(jDesktopPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton2.setText("Attach");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -134,53 +125,34 @@ public class addUser extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 480, -1, -1));
+        jButton2.setBounds(880, 500, 130, 30);
+        jLayeredPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add_user_1.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel1.setBounds(0, 0, 1366, 768);
+        jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    String m;
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
 
-            if (jbm.isSelected()) {
-                m = jbm.getText();
-            } else if (jbf.isSelected()) {
-                m = jbf.getText();
-
-            }
-            String[] name = ttname.getText().split(" ");
-            String feild[] = {txtnic.getText(), name[0], name[1], m, txtmobile.getText(), txthome.getText(), txtaddress.getText(), " 4th", "fdsf", "dfsd", "dsds"};
-            Queries.autosave("usertype", feild);
-
-
-//        String[] ar={"123","123","123","123","123","123","123","123","123","123","123"};
-//        quaries.autosave("usertype", ar);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            JFileChooser jf = new JFileChooser();
-            jf.showOpenDialog(this);
-            File f = jf.getSelectedFile();
-            String path = f.getAbsolutePath();
-            path = path.replace("\\", "/");
-            //-----------------------------
-            File ff = new File(path);
-            Image img = ImageIO.read(ff);
-            img = img.getScaledInstance(image.getWidth(), image.getHeight(), Image.SCALE_SMOOTH);
-            image.setIcon(new ImageIcon(img));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void txtnicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnicActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnicActionPerformed
 
     private void txtnicKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnicKeyReleased
 
@@ -189,9 +161,9 @@ public class addUser extends javax.swing.JFrame {
                 txtnic.setText(txtnic.getText() + " v");
             }
             if (Integer.parseInt(txtnic.getText().substring(2, 5)) > 500) {
-//                if (Integer.parseInt(txtnic.getText().substring(0, 2)) + 1900 > new DateTime().getYear() - 23) {
-                jbf.setSelected(true);
-//                }
+                //                if (Integer.parseInt(txtnic.getText().substring(0, 2)) + 1900 > new DateTime().getYear() - 23) {
+                    jbf.setSelected(true);
+                    //                }
 
             } else {
                 jbm.setSelected(true);
@@ -216,6 +188,14 @@ public class addUser extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ttnameKeyTyped
 
+    private void txtmobileKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyPressed
+        // TODO add your handling code here:
+
+        if (txtmobile.getCaretPosition() <= 3) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtmobileKeyPressed
+
     private void txtmobileKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyTyped
         char c = evt.getKeyChar();
         if (!(Character.isDigit(c) | c == '+')) {
@@ -234,21 +214,27 @@ public class addUser extends javax.swing.JFrame {
     }//GEN-LAST:event_txtmobileKeyTyped
 
     private void txtmobileKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyReleased
+
     }//GEN-LAST:event_txtmobileKeyReleased
 
-    private void txtmobileKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyPressed
-        // TODO add your handling code here:
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            JFileChooser jf = new JFileChooser();
+            jf.showOpenDialog(this);
+            File f = jf.getSelectedFile();
+            String path = f.getAbsolutePath();
+            jpath = path.replace("\\", "/");
+                //-----------------------------
+                File ff = new File(path);
+                Image img = ImageIO.read(ff);
+                img = img.getScaledInstance(image.getWidth(), image.getHeight(), Image.SCALE_SMOOTH);
+                image.setIcon(new ImageIcon(img));
 
-        if (txtmobile.getCaretPosition() <= 3) {
-            evt.consume();
-        }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-
-    }//GEN-LAST:event_txtmobileKeyPressed
-
-    private void txtnicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnicActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtnicActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -263,47 +249,32 @@ public class addUser extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
-
-
-
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(addUser.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(addUser.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(addUser.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(addUser.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(addUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                new addUser().setVisible(true);
-                addUser add = new addUser();
-                AWTUtilities.setWindowOpaque(add, false);
-                add.setVisible(true);
+                new addUser().setVisible(true);
             }
         });
-
-
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel image;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLayeredPane jLayeredPane1;
     public static javax.swing.JRadioButton jbf;
     public static javax.swing.JRadioButton jbm;
     public static javax.swing.JTextField ttname;
@@ -312,4 +283,5 @@ public class addUser extends javax.swing.JFrame {
     public static javax.swing.JTextField txtmobile;
     private javax.swing.JTextField txtnic;
     // End of variables declaration//GEN-END:variables
+String jpath;
 }
