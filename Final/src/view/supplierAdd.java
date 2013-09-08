@@ -4,23 +4,16 @@
  */
 package view;
 
-import com.sun.awt.AWTUtilities;
-import java.awt.Image;
-import java.io.File;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-
 /**
  *
  * @author Naveen
  */
-public class adduser1 extends javax.swing.JFrame {
+public class supplierAdd extends javax.swing.JFrame {
 
     /**
-     * Creates new form adduser1
+     * Creates new form supplierAdd
      */
-    public adduser1() {
+    public supplierAdd() {
         initComponents();
     }
 
@@ -41,13 +34,9 @@ public class adduser1 extends javax.swing.JFrame {
         txtmobile = new javax.swing.JTextField();
         txthome = new javax.swing.JTextField();
         txtaddress = new javax.swing.JTextField();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        image = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         txtnic.setBackground(new java.awt.Color(247, 247, 247));
         txtnic.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -57,11 +46,14 @@ public class adduser1 extends javax.swing.JFrame {
             }
         });
         txtnic.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnicKeyTyped(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtnicKeyReleased(evt);
             }
         });
-        txtnic.setBounds(320, 190, 360, 30);
+        txtnic.setBounds(350, 170, 350, 30);
         jLayeredPane1.add(txtnic, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         ttname.setBackground(new java.awt.Color(247, 247, 247));
@@ -71,21 +63,21 @@ public class adduser1 extends javax.swing.JFrame {
                 ttnameKeyTyped(evt);
             }
         });
-        ttname.setBounds(320, 230, 370, 30);
+        ttname.setBounds(350, 210, 350, 30);
         jLayeredPane1.add(ttname, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jbm.setBackground(new java.awt.Color(247, 247, 247));
         jbm.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jbm.setForeground(new java.awt.Color(0, 177, 255));
         jbm.setText("Male");
-        jbm.setBounds(340, 270, 55, 25);
+        jbm.setBounds(360, 260, 55, 25);
         jLayeredPane1.add(jbm, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jbf.setBackground(new java.awt.Color(247, 247, 247));
         jbf.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jbf.setForeground(new java.awt.Color(0, 177, 255));
         jbf.setText("Female");
-        jbf.setBounds(420, 270, 69, 25);
+        jbf.setBounds(460, 260, 69, 25);
         jLayeredPane1.add(jbf, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txtmobile.setBackground(new java.awt.Color(247, 247, 247));
@@ -102,36 +94,20 @@ public class adduser1 extends javax.swing.JFrame {
                 txtmobileKeyReleased(evt);
             }
         });
-        txtmobile.setBounds(330, 380, 22, 16);
+        txtmobile.setBounds(370, 350, 330, 30);
         jLayeredPane1.add(txtmobile, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txthome.setBackground(new java.awt.Color(247, 247, 247));
         txthome.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txthome.setBounds(330, 410, 360, 30);
+        txthome.setBounds(370, 390, 330, 30);
         jLayeredPane1.add(txthome, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txtaddress.setBackground(new java.awt.Color(247, 247, 247));
         txtaddress.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txtaddress.setBounds(320, 450, 360, 30);
+        txtaddress.setBounds(370, 430, 330, 30);
         jLayeredPane1.add(txtaddress, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        image.setBounds(20, 0, 250, 260);
-        jDesktopPane1.add(image, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jDesktopPane1.setBounds(820, 200, 270, 260);
-        jLayeredPane1.add(jDesktopPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton2.setText("Attach");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-<<<<<<< HEAD:Final/src/view/adduser1.java
-        jButton2.setBounds(880, 500, 130, 30);
-        jLayeredPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add_user_1.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/waiteradd..png"))); // NOI18N
         jLabel1.setBounds(0, 0, 1366, 768);
         jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -149,20 +125,20 @@ public class adduser1 extends javax.swing.JFrame {
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-=======
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 480, -1, -1));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add_user_1.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
->>>>>>> 46b2b00ec36b1a3851b4ea139b7f99f9577dc788:Final/src/view/addUser.java
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtnicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnicActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnicActionPerformed
+
+    private void txtnicKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnicKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtnicKeyTyped
 
     private void txtnicKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnicKeyReleased
 
@@ -204,7 +180,6 @@ public class adduser1 extends javax.swing.JFrame {
         if (txtmobile.getCaretPosition() <= 3) {
             evt.consume();
         }
-
     }//GEN-LAST:event_txtmobileKeyPressed
 
     private void txtmobileKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyTyped
@@ -228,24 +203,6 @@ public class adduser1 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtmobileKeyReleased
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            JFileChooser jf = new JFileChooser();
-            jf.showOpenDialog(this);
-            File f = jf.getSelectedFile();
-            String path = f.getAbsolutePath();
-            jpath = path.replace("\\", "/");
-                //-----------------------------
-                File ff = new File(path);
-                Image img = ImageIO.read(ff);
-                img = img.getScaledInstance(image.getWidth(), image.getHeight(), Image.SCALE_SMOOTH);
-                image.setIcon(new ImageIcon(img));
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -263,30 +220,24 @@ public class adduser1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(adduser1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(supplierAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(adduser1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(supplierAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(adduser1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(supplierAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(adduser1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(supplierAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new adduser1().setVisible(true);
-                adduser1 a = new adduser1();
-                AWTUtilities.setWindowOpaque(a, false);
-                a.setVisible(true);
+                new supplierAdd().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel image;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     public static javax.swing.JRadioButton jbf;
@@ -297,5 +248,4 @@ public class adduser1 extends javax.swing.JFrame {
     public static javax.swing.JTextField txtmobile;
     private javax.swing.JTextField txtnic;
     // End of variables declaration//GEN-END:variables
-String jpath;
 }
