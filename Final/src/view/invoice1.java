@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
-import model.invoice_quaries;
+import model.Queries;
 
 /**
  *
@@ -135,7 +135,7 @@ public class invoice1 extends javax.swing.JFrame {
     private void txt_itemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_itemKeyReleased
         try {
             String field = txt_item.getText();
-            ResultSet rs = invoice_quaries.invoiceSeach(field);
+            ResultSet rs = Queries.invoiceSeach(field);
             while (rs.next()) {
 
                 Vector v = new Vector();
@@ -170,7 +170,7 @@ public class invoice1 extends javax.swing.JFrame {
 
             try {
                 String field1 = txt_item.getText();
-                ResultSet rs = invoice_quaries.invoiceTable(field1);
+                ResultSet rs = Queries.invoiceTable(field1);
                 while(rs.next()){
 
                     Vector v = new Vector();
