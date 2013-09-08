@@ -4,18 +4,16 @@
  */
 package view;
 
-import com.sun.awt.AWTUtilities;
-
 /**
  *
  * @author Naveen
  */
-public class waiteradd1 extends javax.swing.JFrame {
+public class waiterAdd extends javax.swing.JFrame {
 
     /**
-     * Creates new form waiteradd1
+     * Creates new form waiterAdd
      */
-    public waiteradd1() {
+    public waiterAdd() {
         initComponents();
     }
 
@@ -39,7 +37,6 @@ public class waiteradd1 extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         txtnic.setBackground(new java.awt.Color(247, 247, 247));
         txtnic.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -107,7 +104,6 @@ public class waiteradd1 extends javax.swing.JFrame {
 
         txtaddress.setBackground(new java.awt.Color(247, 247, 247));
         txtaddress.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-<<<<<<< HEAD:Final/src/view/waiteradd1.java
         txtaddress.setBounds(360, 430, 340, 30);
         jLayeredPane1.add(txtaddress, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -129,23 +125,8 @@ public class waiteradd1 extends javax.swing.JFrame {
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-=======
-        getContentPane().add(txtaddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 430, 190, 30));
-
-        jButton2.setText("Save");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 570, 110, 40));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/waiteradd..png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
->>>>>>> 46b2b00ec36b1a3851b4ea139b7f99f9577dc788:Final/src/view/waiteradd.java
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtnicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnicActionPerformed
@@ -239,23 +220,20 @@ public class waiteradd1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(waiteradd1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(waiterAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(waiteradd1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(waiterAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(waiteradd1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(waiterAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(waiteradd1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(waiterAdd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new waiteradd1().setVisible(true);
-                waiteradd1 w = new waiteradd1();
-                AWTUtilities.setWindowOpaque(w, false);
-                w.setVisible(true);
+                new waiterAdd().setVisible(true);
             }
         });
     }
