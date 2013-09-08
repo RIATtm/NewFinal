@@ -4,6 +4,8 @@
  */
 package view;
 
+import com.sun.awt.AWTUtilities;
+import control.DBConnection;
 import control.focus;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -47,6 +49,7 @@ public class invoice extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         txt_item.setBackground(new java.awt.Color(246, 246, 246));
         txt_item.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -86,7 +89,7 @@ public class invoice extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Invoice ID", "Item ID", "Waiter ID", "Item", "Quantity", "Price", "Total"
+                "Item ID", "Item", "Quantity", "Price", "Total"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -134,6 +137,7 @@ public class invoice extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_itemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_itemKeyPressed
@@ -163,10 +167,7 @@ public class invoice extends javax.swing.JFrame {
         
         try {
             String s = txt_item.getText();
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/aaaa", "root", "123");
-            Statement st = c.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM aaa WHERE t1 LIKE '" + txt_item.getText() + "%'");
+           ResultSet rs =  DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM product WHERE pro_name LIKE '" + txt_item.getText() + "%'");
             Vector v = new Vector();
             while (rs.next()) {
                 v.add(rs.getString(1));
@@ -255,9 +256,13 @@ public class invoice extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new invoice().setVisible(true);
+//                new invoice().setVisible(true);
+                invoice  in=new invoice();
+                AWTUtilities.setWindowOpaque(in, false);
+                in.setVisible(true);
             }
         });
+        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox combo_item;
