@@ -34,9 +34,9 @@ public class waiterAdd extends javax.swing.JFrame {
         jbf = new javax.swing.JRadioButton();
         jbm = new javax.swing.JRadioButton();
         txtmobile = new javax.swing.JTextField();
-        txthome = new javax.swing.JTextField();
         txtaddress = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        txthome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -100,11 +100,6 @@ public class waiterAdd extends javax.swing.JFrame {
         txtmobile.setBounds(360, 350, 340, 30);
         jLayeredPane1.add(txtmobile, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        txthome.setBackground(new java.awt.Color(247, 247, 247));
-        txthome.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txthome.setBounds(360, 390, 330, 30);
-        jLayeredPane1.add(txthome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         txtaddress.setBackground(new java.awt.Color(247, 247, 247));
         txtaddress.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtaddress.setBounds(360, 430, 340, 30);
@@ -119,8 +114,25 @@ public class waiterAdd extends javax.swing.JFrame {
         jButton2.setBounds(780, 570, 57, 23);
         jLayeredPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        txthome.setBackground(new java.awt.Color(247, 247, 247));
+        txthome.setText("+94");
+        txthome.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txthome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txthomeKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txthomeKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txthomeKeyTyped(evt);
+            }
+        });
+        txthome.setBounds(360, 390, 170, 30);
+        jLayeredPane1.add(txthome, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/waiteradd..png"))); // NOI18N
-        jLabel1.setBounds(0, 0, 1366, 768);
+        jLabel1.setBounds(10, 0, 1366, 768);
         jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -219,14 +231,14 @@ String m ="";
         try {
 
             if (jbm.isSelected()) {
-                m = jbm.getText();
+                m = "m";
             } else if (jbf.isSelected()) {
-                m = jbf.getText();
+                m = "f";
 
             }
             String[] name = ttname.getText().split(" ");
-            String feild[] = {txtnic.getText(), name[0], name[1], m, txtmobile.getText(), txthome.getText(), txtaddress.getText(), "dsds"};
-            quaries.waitersave("waiter", feild);
+            String feild[] = {txtnic.getText(), ttname.getText(), m, txtmobile.getText(), txthome.getText(), txtaddress.getText(), "dsds"};
+            quaries.waitersave("labourer", feild);
 
             //        String[] ar={"123"z,"123","123","123","123","123","123","123","123","123","123"};
             //        quaries.autosave("usertype", ar);
@@ -234,6 +246,35 @@ String m ="";
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txthomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txthomeKeyPressed
+        // TODO add your handling code here:
+
+        if (txthome.getCaretPosition() <= 3) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txthomeKeyPressed
+
+    private void txthomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txthomeKeyReleased
+
+    }//GEN-LAST:event_txthomeKeyReleased
+
+    private void txthomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txthomeKeyTyped
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) | c == '+')) {
+            evt.consume();
+        }
+        if (txthome.getText().length() == 12) {
+            evt.consume();
+        }
+
+        if (txthome.getCaretPosition() == 3) {
+
+            if (evt.getKeyChar() == '0') {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_txthomeKeyTyped
 
     /**
      * @param args the command line arguments

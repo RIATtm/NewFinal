@@ -174,31 +174,31 @@ public class userssearch extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         try {
-            DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
-            String idnic = txtnic.getText();
-            ResultSet rs = quaries.searchusers("test", "idtest", txtnic.getText());
-            Vector v = new Vector();
-            while (rs.next()) {
-                v.add(rs.getString(1));
-                v.add(rs.getString(2));
-                v.add(rs.getString(3));
-                v.add(rs.getString(4));
-                v.add(rs.getString(5));
-                v.add(rs.getString(6));
-            
-                
-                dt.addRow(v);
-            }
-           String s=dt.getValueAt(jTable1.getSelectedRow(), 0).toString();
-            System.out.println(s);
-            ResultSet pic=quaries.searchusers("user", "id", s);
-            if(pic.next()){
-                pic.getString("pic");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//         try {
+//            DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+//            String idnic = txtnic.getText();
+//            ResultSet rs = quaries.searchusers("test", "idtest", txtnic.getText());
+//            Vector v = new Vector();
+//            while (rs.next()) {
+//                v.add(rs.getString(1));
+//                v.add(rs.getString(2));
+//                v.add(rs.getString(3));
+//                v.add(rs.getString(4));
+//                v.add(rs.getString(5));
+//                v.add(rs.getString(6));
+//            
+//                
+//                dt.addRow(v);
+//            }
+//           String s=dt.getValueAt(jTable1.getSelectedRow(), 0).toString();
+//            System.out.println(s);
+//            ResultSet pic=quaries.searchusers("user", "id", s);
+//            if(pic.next()){
+//                pic.getString("pic");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -236,31 +236,31 @@ public class userssearch extends javax.swing.JFrame {
     }//GEN-LAST:event_txtnicKeyPressed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        try {
-            DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
-            String idnic = txtnic.getText();
-            ResultSet rs = quaries.searchusers("test", "idtest", txtnic.getText());
-            Vector v = new Vector();
-            while (rs.next()) {
-                v.add(rs.getString(1));
-                v.add(rs.getString(2));
-                v.add(rs.getString(3));
-                v.add(rs.getString(4));
-                v.add(rs.getString(5));
-                v.add(rs.getString(6));
-            
-                
-                dt.addRow(v);
-            }
-           String s=dt.getValueAt(jTable1.getSelectedRow(), 0).toString();
-            System.out.println(s);
-            ResultSet pic=quaries.searchusers("user", "id", s);
-            if(pic.next()){
-                pic.getString("pic");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+//            String idnic = txtnic.getText();
+//            ResultSet rs = quaries.searchusers("test", "idtest", txtnic.getText());
+//            Vector v = new Vector();
+//            while (rs.next()) {
+//                v.add(rs.getString(1));
+//                v.add(rs.getString(2));
+//                v.add(rs.getString(3));
+//                v.add(rs.getString(4));
+//                v.add(rs.getString(5));
+//                v.add(rs.getString(6));
+//            
+//                
+//                dt.addRow(v);
+//            }
+//           String s=dt.getValueAt(jTable1.getSelectedRow(), 0).toString();
+//            System.out.println(s);
+//            ResultSet pic=quaries.searchusers("user", "id", s);
+//            if(pic.next()){
+//                pic.getString("pic");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

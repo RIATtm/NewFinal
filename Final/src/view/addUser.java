@@ -7,9 +7,12 @@ package view;
 import com.sun.awt.AWTUtilities;
 import java.awt.Image;
 import java.io.File;
+import java.io.FileInputStream;
+import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import model.quaries;
 
 /**
@@ -18,10 +21,13 @@ import model.quaries;
  */
 public class addUser extends javax.swing.JFrame {
 
+    String username, password, status;
+
     /**
      * Creates new form addUser
      */
     public addUser() {
+        status = JOptionPane.showInputDialog("Enter Status :");
         initComponents();
     }
 
@@ -35,21 +41,31 @@ public class addUser extends javax.swing.JFrame {
     private void initComponents() {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
+        jButton3 = new javax.swing.JButton();
         txtnic = new javax.swing.JTextField();
         ttname = new javax.swing.JTextField();
         jbm = new javax.swing.JRadioButton();
         jbf = new javax.swing.JRadioButton();
-        txtmobile = new javax.swing.JTextField();
         txthome = new javax.swing.JTextField();
         txtaddress = new javax.swing.JTextField();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         image = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txtmobile1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+
+        jButton3.setText("test");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jButton3.setBounds(320, 540, 51, 23);
+        jLayeredPane1.add(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txtnic.setBackground(new java.awt.Color(247, 247, 247));
         txtnic.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -90,26 +106,26 @@ public class addUser extends javax.swing.JFrame {
         jbf.setBounds(420, 270, 69, 25);
         jLayeredPane1.add(jbf, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        txtmobile.setBackground(new java.awt.Color(247, 247, 247));
-        txtmobile.setText("+94");
-        txtmobile.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txtmobile.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtmobileKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtmobileKeyTyped(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtmobileKeyReleased(evt);
+        txthome.setBackground(new java.awt.Color(247, 247, 247));
+        txthome.setText("+94");
+        txthome.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txthome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txthomeActionPerformed(evt);
             }
         });
-        txtmobile.setBounds(330, 380, 22, 16);
-        jLayeredPane1.add(txtmobile, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        txthome.setBackground(new java.awt.Color(247, 247, 247));
-        txthome.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txthome.setBounds(330, 410, 360, 30);
+        txthome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txthomeKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txthomeKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txthomeKeyTyped(evt);
+            }
+        });
+        txthome.setBounds(320, 410, 170, 30);
         jLayeredPane1.add(txthome, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txtaddress.setBackground(new java.awt.Color(247, 247, 247));
@@ -141,6 +157,23 @@ public class addUser extends javax.swing.JFrame {
         jButton1.setBounds(690, 590, 110, 40);
         jLayeredPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        txtmobile1.setBackground(new java.awt.Color(247, 247, 247));
+        txtmobile1.setText("+94");
+        txtmobile1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtmobile1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtmobile1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtmobile1KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtmobile1KeyTyped(evt);
+            }
+        });
+        txtmobile1.setBounds(320, 370, 170, 30);
+        jLayeredPane1.add(txtmobile1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add_user_1.png"))); // NOI18N
         jLabel1.setBounds(0, 0, 1366, 768);
         jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -170,13 +203,15 @@ public class addUser extends javax.swing.JFrame {
     private void txtnicKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnicKeyReleased
 
         if (txtnic.getCaretPosition() == 9) {
-            if (txtnic.getText().lastIndexOf(" v") == -1) {
-                txtnic.setText(txtnic.getText() + " v");
+            if (txtnic.getText().lastIndexOf("v") == -1) {
+                txtnic.setText(txtnic.getText() + "v");
             }
+            evt.consume();
+
             if (Integer.parseInt(txtnic.getText().substring(2, 5)) > 500) {
                 //                if (Integer.parseInt(txtnic.getText().substring(0, 2)) + 1900 > new DateTime().getYear() - 23) {
-                    jbf.setSelected(true);
-                    //                }
+                jbf.setSelected(true);
+                //                }
 
             } else {
                 jbm.setSelected(true);
@@ -201,34 +236,33 @@ public class addUser extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ttnameKeyTyped
 
-    private void txtmobileKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyPressed
+    private void txthomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txthomeKeyPressed
         // TODO add your handling code here:
 
-        if (txtmobile.getCaretPosition() <= 3) {
+        if (txthome.getCaretPosition() <= 3) {
             evt.consume();
         }
-    }//GEN-LAST:event_txtmobileKeyPressed
+    }//GEN-LAST:event_txthomeKeyPressed
 
-    private void txtmobileKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyTyped
+    private void txthomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txthomeKeyTyped
         char c = evt.getKeyChar();
         if (!(Character.isDigit(c) | c == '+')) {
             evt.consume();
         }
-        if (txtmobile.getText().length() == 12) {
+        if (txthome.getText().length() == 12) {
             evt.consume();
         }
 
-        if (txtmobile.getCaretPosition() == 3) {
-            System.out.println("4");
+        if (txthome.getCaretPosition() == 3) {
+
             if (evt.getKeyChar() == '0') {
                 evt.consume();
             }
         }
-    }//GEN-LAST:event_txtmobileKeyTyped
+    }//GEN-LAST:event_txthomeKeyTyped
 
-    private void txtmobileKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyReleased
-
-    }//GEN-LAST:event_txtmobileKeyReleased
+    private void txthomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txthomeKeyReleased
+    }//GEN-LAST:event_txthomeKeyReleased
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
@@ -237,30 +271,32 @@ public class addUser extends javax.swing.JFrame {
             File f = jf.getSelectedFile();
             String path = f.getAbsolutePath();
             jpath = path.replace("\\", "/");
-                //-----------------------------
-                File ff = new File(path);
-                Image img = ImageIO.read(ff);
-                img = img.getScaledInstance(image.getWidth(), image.getHeight(), Image.SCALE_SMOOTH);
-                image.setIcon(new ImageIcon(img));
+            //-----------------------------
+            File ff = new File(path);
+            Image img = ImageIO.read(ff);
+            img = img.getScaledInstance(image.getWidth(), image.getHeight(), Image.SCALE_SMOOTH);
+            image.setIcon(new ImageIcon(img));
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
-String m=" ";
+    String m = " ";
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        autoGenerate();
         try {
 
             if (jbm.isSelected()) {
-                m = jbm.getText();
+                m = "m";
             } else if (jbf.isSelected()) {
-                m = jbf.getText();
+                m = "f";
 
             }
-            String[] name = ttname.getText().split(" ");
-            String feild[] = {txtnic.getText(), name[0], name[1], m, txtmobile.getText(
-            ), txthome.getText(), txtaddress.getText(), jpath, "fdsf", "dfsd", "dsds"};
-            quaries.autosave("usertype", feild);
+            // String[] name = ttname.getText().split(" ");
+            String feild[] = {txtnic.getText(), ttname.getText(), m, txtmobile1.getText(), txthome.getText(), txtaddress.getText(), jpath, status};
+            String login[] = {username, password, txtnic.getText()};
+            quaries.autosave("usertype", feild, login);
+
 
             //        String[] ar={"123","123","123","123","123","123","123","123","123","123","123"};
             //        quaries.autosave("usertype", ar);
@@ -268,6 +304,40 @@ String m=" ";
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtmobile1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobile1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtmobile1KeyPressed
+
+    private void txtmobile1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobile1KeyTyped
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c) | c == '+')) {
+            evt.consume();
+        }
+        if (txtmobile1.getText().length() == 12) {
+            evt.consume();
+        }
+
+        if (txtmobile1.getCaretPosition() == 3) {
+
+            if (evt.getKeyChar() == '0') {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_txtmobile1KeyTyped
+
+    private void txtmobile1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobile1KeyReleased
+        if (txtmobile1.getCaretPosition() <= 3) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtmobile1KeyReleased
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void txthomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txthomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txthomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,6 +379,7 @@ String m=" ";
     private javax.swing.JLabel image;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
@@ -317,8 +388,32 @@ String m=" ";
     public static javax.swing.JTextField ttname;
     public static javax.swing.JTextField txtaddress;
     public static javax.swing.JTextField txthome;
-    public static javax.swing.JTextField txtmobile;
+    public static javax.swing.JTextField txtmobile1;
     private javax.swing.JTextField txtnic;
     // End of variables declaration//GEN-END:variables
-String jpath;
+    String jpath;
+
+    public void autoGenerate() {
+        String name, number1, number2;
+        String ar[];
+        number1 = txtnic.getText().substring(0, 2);
+        number2 = txtnic.getText().substring(7, 9);
+        if (ttname.getText().contains(" ")) {
+            ar = ttname.getText().split(" ");
+            username = ar[0] + number1 + number2;
+        } else {
+            name = ttname.getText();
+            username = name + number1 + number2;
+        }
+
+        password = new Random().nextInt(800000) + 100000 + "";
+    }
+//    public void pic()throws Exception{
+//        FileInputStream file=new FileInputStream(new File(jpath));
+//        int[] i=new int[128];
+//        for(int t=0;t<i.length;t++){
+//            i[t]=file.read();
+//            System.out.println(i);
+//        }
+//    }
 }
