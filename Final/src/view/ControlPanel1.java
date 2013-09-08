@@ -6,6 +6,8 @@ package view;
 
 import com.sun.awt.AWTUtilities;
 import control.DBConnection;
+import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,11 +16,14 @@ import javax.swing.JOptionPane;
  */
 public class ControlPanel1 extends javax.swing.JFrame {
 
+    String accUserName = null;//get the user name currently loged into
+
     /**
      * Creates new form ControlPanel1
      */
     public ControlPanel1() {
         initComponents();
+        visibility();
     }
 
     /**
@@ -30,13 +35,13 @@ public class ControlPanel1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLayeredPane1 = new javax.swing.JLayeredPane();
         changeUserName = new javax.swing.JLayeredPane();
         jDesktopPane2 = new javax.swing.JDesktopPane();
         image1 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         txt_userName = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
         UserAccounts = new javax.swing.JLayeredPane();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         image = new javax.swing.JLabel();
@@ -49,6 +54,18 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         ControlPanel = new javax.swing.JLayeredPane();
         changePassword = new javax.swing.JLayeredPane();
+        jDesktopPane3 = new javax.swing.JDesktopPane();
+        image2 = new javax.swing.JLabel();
+        txt_newPas = new javax.swing.JPasswordField();
+        txt_confirmPas = new javax.swing.JPasswordField();
+        txt_currPas = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        invalidCurPas = new javax.swing.JLabel();
+        pdmatch = new javax.swing.JLabel();
+        pmatch = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         image1.setBounds(0, 0, 220, 200);
@@ -57,13 +74,14 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jDesktopPane2.setBounds(830, 200, 220, 200);
         changeUserName.add(jDesktopPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/change_user.png"))); // NOI18N
         jButton6.setContentAreaFilled(false);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        jButton6.setBounds(440, 280, 250, 90);
+        jButton6.setBounds(330, 280, 360, 90);
         changeUserName.add(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         txt_userName.setBounds(230, 210, 450, 30);
         changeUserName.add(txt_userName, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -85,6 +103,11 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/change_pass.png"))); // NOI18N
         jButton1.setContentAreaFilled(false);
         jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/glow_pass.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jButton1.setBounds(710, 360, 410, 100);
         UserAccounts.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -113,6 +136,11 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/change_user.png"))); // NOI18N
         jButton5.setContentAreaFilled(false);
         jButton5.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/glow_user.png"))); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jButton5.setBounds(250, 360, 410, 100);
         UserAccounts.add(jButton5, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -122,6 +150,87 @@ public class ControlPanel1 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+
+        image2.setBounds(0, 0, 220, 200);
+        jDesktopPane3.add(image2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jDesktopPane3.setBounds(820, 140, 220, 200);
+        changePassword.add(jDesktopPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        txt_newPas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txt_newPas.setBounds(240, 300, 410, 20);
+        changePassword.add(txt_newPas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        txt_confirmPas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txt_confirmPas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_confirmPasActionPerformed(evt);
+            }
+        });
+        txt_confirmPas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_confirmPasKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_confirmPasKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_confirmPasKeyTyped(evt);
+            }
+        });
+        txt_confirmPas.setBounds(240, 420, 410, 30);
+        changePassword.add(txt_confirmPas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        txt_currPas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txt_currPas.setBounds(240, 170, 410, 30);
+        changePassword.add(txt_currPas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 26)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 0, 255));
+        jLabel4.setText("Enter the new password");
+        jLabel4.setBounds(240, 240, 430, 30);
+        changePassword.add(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 26)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(51, 0, 255));
+        jLabel5.setText("Confirm password");
+        jLabel5.setBounds(240, 370, 430, 30);
+        changePassword.add(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 26)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(51, 0, 255));
+        jLabel6.setText("Enter the current password");
+        jLabel6.setBounds(240, 120, 430, 30);
+        changePassword.add(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        invalidCurPas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        invalidCurPas.setForeground(new java.awt.Color(255, 51, 51));
+        invalidCurPas.setText("Invalid Password");
+        invalidCurPas.setBounds(530, 210, 130, 30);
+        changePassword.add(invalidCurPas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        pdmatch.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        pdmatch.setForeground(new java.awt.Color(255, 51, 51));
+        pdmatch.setText("Password Did not Matched");
+        pdmatch.setBounds(470, 460, 190, 30);
+        changePassword.add(pdmatch, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        pmatch.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        pmatch.setForeground(new java.awt.Color(0, 153, 51));
+        pmatch.setText("Password Matched");
+        pmatch.setBounds(520, 460, 140, 30);
+        changePassword.add(pmatch, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/cp.png"))); // NOI18N
+        jButton7.setContentAreaFilled(false);
+        jButton7.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/cpg.png"))); // NOI18N
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jButton7.setBounds(300, 520, 380, 100);
+        changePassword.add(jButton7, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/changePss.png"))); // NOI18N
         jLabel3.setBounds(0, 0, 1366, 768);
@@ -146,9 +255,9 @@ public class ControlPanel1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        String username = null;//current userName
+        String username = null;
         try {
-            DBConnection.setConnection().createStatement().executeUpdate("UPDATE login set username='" + txt_userName.getText() + "' WHERE username='"+username+"'");
+            DBConnection.setConnection().createStatement().executeUpdate("UPDATE login set username='" + txt_userName.getText() + "' WHERE username='" + username + "'");
             JOptionPane.showMessageDialog(this, "User Name updated succesfully !", "Message", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             if (!(txt_userName.getText() == null)) {
@@ -160,6 +269,62 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        changeUserName.setVisible(true);
+        UserAccounts.setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        changePassword.setVisible(true);
+        UserAccounts.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txt_confirmPasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_confirmPasKeyReleased
+        int getLength = new String(txt_newPas.getPassword()).length();
+        if (new String(txt_confirmPas.getPassword()).length() == getLength) {
+            if (new String(txt_newPas.getPassword()).equals(new String(txt_confirmPas.getPassword()))) {
+                pmatch.setVisible(true);
+            } else {
+                pdmatch.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_txt_confirmPasKeyReleased
+
+    private void txt_confirmPasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_confirmPasActionPerformed
+    }//GEN-LAST:event_txt_confirmPasActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        try {
+            //------- get the password of the account currently logged in-------
+            ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM login WHERE username='" + accUserName + "' AND password='" + new String(txt_currPas.getPassword()) + "'");
+            if (rs.next()) {
+
+                if (new String(txt_newPas.getPassword()).equals(new String(txt_confirmPas.getPassword()))) {
+                    pmatch.setVisible(true);
+
+                    //---------updating new password----------------------------
+                    DBConnection.setConnection().createStatement().executeUpdate("UPDATE login set password='" + new String(txt_newPas.getPassword()) + "' WHERE username='" + accUserName + "'");
+
+                } else {
+                    pdmatch.setVisible(true);
+                    setNullAll();
+                }
+
+            } else {
+                setNullAll();
+                txt_currPas.setText(null);
+                invalidCurPas.setVisible(true);
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void txt_confirmPasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_confirmPasKeyTyped
+    }//GEN-LAST:event_txt_confirmPasKeyTyped
+
+    private void txt_confirmPasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_confirmPasKeyPressed
+    }//GEN-LAST:event_txt_confirmPasKeyPressed
 
     /**
      * @param args the command line arguments
@@ -192,7 +357,7 @@ public class ControlPanel1 extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 //new ControlPanel1().setVisible(true);
-                ControlPanel1 cp1=new ControlPanel1();
+                ControlPanel1 cp1 = new ControlPanel1();
                 AWTUtilities.setWindowOpaque(cp1, false);
                 cp1.setVisible(true);
             }
@@ -205,20 +370,45 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JLayeredPane changeUserName;
     private javax.swing.JLabel image;
     private javax.swing.JLabel image1;
+    private javax.swing.JLabel image2;
+    private javax.swing.JLabel invalidCurPas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane2;
+    private javax.swing.JDesktopPane jDesktopPane3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JLabel pdmatch;
+    private javax.swing.JLabel pmatch;
+    private javax.swing.JPasswordField txt_confirmPas;
+    private javax.swing.JPasswordField txt_currPas;
+    private javax.swing.JPasswordField txt_newPas;
     private javax.swing.JLabel txt_userName;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 
+    public void visibility() {
+        pdmatch.setVisible(false);
+        pmatch.setVisible(false);
+        invalidCurPas.setVisible(false);
+        changeUserName.setVisible(false);
+        changePassword.setVisible(false);
+    }
+
+    public void setNullAll() {
+        txt_confirmPas.setText(null);
+        txt_newPas.setText(null);
+        txt_userName.setText(null);
+    }
 }
