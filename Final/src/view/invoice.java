@@ -4,24 +4,27 @@
  */
 package view;
 
-import com.sun.awt.AWTUtilities;
 import control.focus;
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
-import model.Queries;
+import model.invoice_quaries;
 
 /**
  *
- * @author Naveen
+ * @author AT
  */
-public class invoice1 extends javax.swing.JFrame {
+public class invoice extends javax.swing.JFrame {
 
     /**
-     * Creates new form invoice1
+     * Creates new form invoice
      */
-    public invoice1() {
+    public invoice() {
         initComponents();
     }
 
@@ -40,10 +43,10 @@ public class invoice1 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         txt_qty = new javax.swing.JTextField();
+        txt_waiterno = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         txt_item.setBackground(new java.awt.Color(246, 246, 246));
         txt_item.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -51,14 +54,14 @@ public class invoice1 extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_itemKeyPressed(evt);
             }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_itemKeyTyped(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_itemKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_itemKeyTyped(evt);
+            }
         });
-        txt_item.setBounds(360, 130, 240, 30);
+        txt_item.setBounds(240, 130, 240, 30);
         jLayeredPane1.add(txt_item, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         combo_item.setBackground(new java.awt.Color(246, 246, 246));
@@ -73,7 +76,7 @@ public class invoice1 extends javax.swing.JFrame {
                 combo_itemActionPerformed(evt);
             }
         });
-        combo_item.setBounds(360, 130, 240, 30);
+        combo_item.setBounds(240, 130, 240, 30);
         jLayeredPane1.add(combo_item, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jTable1.setBackground(new java.awt.Color(246, 246, 246));
@@ -83,12 +86,12 @@ public class invoice1 extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Invoice ID", "Item ID", "Item", "Quantity", "Price", "Total"
+                "Invoice ID", "Item ID", "Waiter ID", "Item", "Quantity", "Price", "Total"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jScrollPane1.setBounds(300, 197, 770, 450);
+        jScrollPane1.setBounds(220, 210, 830, 450);
         jLayeredPane1.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txt_qty.setBackground(new java.awt.Color(246, 246, 246));
@@ -98,8 +101,18 @@ public class invoice1 extends javax.swing.JFrame {
                 txt_qtyKeyPressed(evt);
             }
         });
-        txt_qty.setBounds(850, 130, 210, 30);
+        txt_qty.setBounds(980, 130, 210, 30);
         jLayeredPane1.add(txt_qty, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        txt_waiterno.setBackground(new java.awt.Color(246, 246, 246));
+        txt_waiterno.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txt_waiterno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_waiternoKeyPressed(evt);
+            }
+        });
+        txt_waiterno.setBounds(630, 130, 210, 30);
+        jLayeredPane1.add(txt_waiterno, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/invoice.png"))); // NOI18N
         jLabel1.setBounds(0, 0, 1366, 768);
@@ -121,39 +134,61 @@ public class invoice1 extends javax.swing.JFrame {
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_itemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_itemKeyPressed
         focus.textFieldsNext(evt, combo_item, null);
     }//GEN-LAST:event_txt_itemKeyPressed
 
-    private void txt_itemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_itemKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_itemKeyTyped
-
     private void txt_itemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_itemKeyReleased
+//        try {
+//            String field = txt_item.getText();
+//            ResultSet rs = invoice_quaries.invoiceSeach(field);
+//            while (rs.next()) {
+//
+//                Vector v = new Vector();
+//                v.add(rs.getString("pro_name"));
+//                combo_item.setModel(new DefaultComboBoxModel(v));
+//                combo_item.setPopupVisible(true);
+//
+//            }
+//
+//            if (txt_item.getText().isEmpty()) {
+//                combo_item.setModel(new DefaultComboBoxModel());
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        
         try {
-            String field = txt_item.getText();
-            ResultSet rs = Queries.invoiceSeach(field);
+            String s = txt_item.getText();
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/aaaa", "root", "123");
+            Statement st = c.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM aaa WHERE t1 LIKE '" + txt_item.getText() + "%'");
+            Vector v = new Vector();
             while (rs.next()) {
-
-                Vector v = new Vector();
-                v.add(rs.getString("pro_name"));
-                combo_item.setModel(new DefaultComboBoxModel(v));
-                combo_item.setPopupVisible(true);
+                v.add(rs.getString(1));
+            }
+            combo_item.setModel(new DefaultComboBoxModel(v));
+            combo_item.showPopup();
+            if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
+                combo_item.grabFocus();
+                combo_item.showPopup();
 
             }
+           
 
-            if (txt_item.getText().isEmpty()) {
-                combo_item.setModel(new DefaultComboBoxModel());
-            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // TODO add your handling code here:
     }//GEN-LAST:event_txt_itemKeyReleased
+
+    private void txt_itemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_itemKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_itemKeyTyped
 
     private void combo_itemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combo_itemMouseClicked
 
@@ -166,12 +201,12 @@ public class invoice1 extends javax.swing.JFrame {
     private void txt_qtyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_qtyKeyPressed
         DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
         focus.textFieldsNext(evt, null, combo_item);
-        if(evt.getKeyCode() == evt.VK_ENTER){
+        if (evt.getKeyCode() == evt.VK_ENTER) {
 
             try {
                 String field1 = txt_item.getText();
-                ResultSet rs = Queries.invoiceTable(field1);
-                while(rs.next()){
+                ResultSet rs = invoice_quaries.invoiceTable(field1);
+                while (rs.next()) {
 
                     Vector v = new Vector();
                     v.add(rs.getString(1));
@@ -185,6 +220,10 @@ public class invoice1 extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_txt_qtyKeyPressed
+
+    private void txt_waiternoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_waiternoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_waiternoKeyPressed
 
     /**
      * @param args the command line arguments
@@ -203,23 +242,20 @@ public class invoice1 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(invoice1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(invoice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(invoice1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(invoice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(invoice1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(invoice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(invoice1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(invoice.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               // new invoice1().setVisible(true);
-                invoice1 in=new invoice1();
-                AWTUtilities.setWindowOpaque(in, false);
-                in.setVisible(true);
+                new invoice().setVisible(true);
             }
         });
     }
@@ -231,5 +267,6 @@ public class invoice1 extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txt_item;
     private javax.swing.JTextField txt_qty;
+    private javax.swing.JTextField txt_waiterno;
     // End of variables declaration//GEN-END:variables
 }
