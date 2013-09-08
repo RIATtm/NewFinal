@@ -33,7 +33,7 @@ public class quaries {
     }
     public static void searchusers(String table,String nic,String idnic)throws Exception{
         
- DBConnection.setConnection().executeQuery("Select * from "+table+" where "+nic+"="+idnic+"");
+ //DBConnection.setConnection().executeQuery("Select * from "+table+" where "+nic+"="+idnic+"");
     
     }
     
