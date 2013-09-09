@@ -13,6 +13,7 @@ import java.io.File;
 import java.sql.ResultSet;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,18 +22,14 @@ import javax.swing.JOptionPane;
  */
 public class ControlPanel1 extends javax.swing.JFrame {
 
-    String accUserName;//get the user name currently loged into
-
     /**
      * Creates new form ControlPanel1
      */
     public ControlPanel1(String currentUser) {
         initComponents();
         accUserName = currentUser;
-        jLabel7.setText(accUserName);
-        visibility();
-        A a=new A();
-        a.getPicture("s");
+        jLabel7.setText(accUserName);//-----setting userName into UserAccounts homePanel----
+        methods();
     }
 
     /**
@@ -44,14 +41,12 @@ public class ControlPanel1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLayeredPane1 = new javax.swing.JLayeredPane();
         changeUserName = new javax.swing.JLayeredPane();
         txt_userName = new javax.swing.JTextField();
         jDesktopPane2 = new javax.swing.JDesktopPane();
         image1 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        ControlPanel = new javax.swing.JLayeredPane();
         changePassword = new javax.swing.JLayeredPane();
         jLabel7 = new javax.swing.JLabel();
         jDesktopPane3 = new javax.swing.JDesktopPane();
@@ -66,7 +61,21 @@ public class ControlPanel1 extends javax.swing.JFrame {
         pdmatch = new javax.swing.JLabel();
         pmatch = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
+        strong = new javax.swing.JLabel();
+        medium = new javax.swing.JLabel();
+        small = new javax.swing.JLabel();
+        red = new javax.swing.JLabel();
+        blue = new javax.swing.JLabel();
+        green = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        ControlPanel = new javax.swing.JLayeredPane();
+        changeAccPic = new javax.swing.JLayeredPane();
+        jDesktopPane4 = new javax.swing.JDesktopPane();
+        image3 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        userpicChange = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         UserAccounts = new javax.swing.JLayeredPane();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         image = new javax.swing.JLabel();
@@ -103,9 +112,6 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jLabel2.setBounds(0, 0, 1366, 768);
         changeUserName.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-
         jLabel7.setBounds(200, 80, 150, 30);
         changePassword.add(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -116,30 +122,51 @@ public class ControlPanel1 extends javax.swing.JFrame {
         changePassword.add(jDesktopPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txt_newPas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txt_newPas.setBounds(240, 300, 410, 20);
+        txt_newPas.setOpaque(false);
+        txt_newPas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_newPasKeyReleased(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_newPasKeyPressed(evt);
+            }
+        });
+        txt_newPas.setBounds(240, 295, 410, 30);
         changePassword.add(txt_newPas, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txt_confirmPas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txt_confirmPas.setOpaque(false);
         txt_confirmPas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_confirmPasActionPerformed(evt);
             }
         });
         txt_confirmPas.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_confirmPasKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_confirmPasKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_confirmPasKeyTyped(evt);
             }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_confirmPasKeyPressed(evt);
+            }
         });
         txt_confirmPas.setBounds(240, 420, 410, 30);
         changePassword.add(txt_confirmPas, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txt_currPas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txt_currPas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_currPasKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_currPasKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_currPasKeyPressed(evt);
+            }
+        });
         txt_currPas.setBounds(240, 170, 410, 30);
         changePassword.add(txt_currPas, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -190,12 +217,79 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jButton7.setBounds(300, 520, 380, 100);
         changePassword.add(jButton7, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        strong.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        strong.setText("Strong ");
+        strong.setBounds(590, 330, 70, 30);
+        changePassword.add(strong, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        medium.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        medium.setText("Medium");
+        medium.setBounds(590, 330, 70, 30);
+        changePassword.add(medium, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        small.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        small.setText("Short");
+        small.setBounds(590, 330, 70, 30);
+        changePassword.add(small, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        red.setBackground(new java.awt.Color(255, 51, 0));
+        red.setOpaque(true);
+        red.setBounds(500, 340, 60, 10);
+        changePassword.add(red, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        blue.setBackground(new java.awt.Color(102, 51, 255));
+        blue.setOpaque(true);
+        blue.setBounds(480, 340, 80, 10);
+        changePassword.add(blue, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        green.setBackground(new java.awt.Color(0, 204, 0));
+        green.setOpaque(true);
+        green.setBounds(460, 340, 100, 10);
+        changePassword.add(green, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/changePss.png"))); // NOI18N
         jLabel3.setBounds(0, 0, 1366, 768);
         changePassword.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        changePassword.setBounds(0, 0, 1366, 768);
-        ControlPanel.add(changePassword, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+
+        image3.setBounds(0, 0, 250, 230);
+        jDesktopPane4.add(image3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jDesktopPane4.setBounds(800, 200, 250, 230);
+        changeAccPic.add(jDesktopPane4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton8.setText("Browse");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        jButton8.setBounds(860, 450, 130, 40);
+        changeAccPic.add(jButton8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/done_d.png"))); // NOI18N
+        jButton9.setContentAreaFilled(false);
+        jButton9.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/doneg1.png"))); // NOI18N
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        jButton9.setBounds(460, 360, 230, 80);
+        changeAccPic.add(jButton9, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        userpicChange.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        userpicChange.setBounds(230, 210, 450, 30);
+        changeAccPic.add(userpicChange, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userNameChange.png"))); // NOI18N
+        jLabel8.setBounds(0, 0, 1366, 768);
+        changeAccPic.add(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        changeAccPic.setBounds(0, 0, 1366, 768);
+        ControlPanel.add(changeAccPic, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         image.setBounds(0, 0, 220, 200);
         jDesktopPane1.add(image, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -221,6 +315,11 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/change_accpic.png"))); // NOI18N
         jButton2.setContentAreaFilled(false);
         jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/glow_accpic.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jButton2.setBounds(250, 470, 410, 100);
         UserAccounts.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -324,7 +423,7 @@ public class ControlPanel1 extends javax.swing.JFrame {
 
                     //---------updating new password----------------------------
                     DBConnection.setConnection().createStatement().executeUpdate("UPDATE login set password='" + new String(txt_newPas.getPassword()) + "' WHERE username='" + accUserName + "'");
-
+                    JOptionPane.showMessageDialog(this, "Password changed succesfully", "Information message", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     pdmatch.setVisible(true);
                     setNullAll();
@@ -344,6 +443,85 @@ public class ControlPanel1 extends javax.swing.JFrame {
 
     private void txt_confirmPasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_confirmPasKeyPressed
     }//GEN-LAST:event_txt_confirmPasKeyPressed
+
+    private void txt_newPasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_newPasKeyReleased
+    }//GEN-LAST:event_txt_newPasKeyReleased
+
+    private void txt_newPasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_newPasKeyPressed
+        int getPasNo = new String(txt_newPas.getPassword()).length();
+        if (getPasNo <= 3 || !(getPasNo > 4)) {
+            small.setVisible(true);
+            red.setVisible(true);
+            medium.setVisible(false);
+            blue.setVisible(false);
+        } else if (getPasNo <= 6 || !(getPasNo > 8)) {
+            medium.setVisible(true);
+            blue.setVisible(true);
+            //----------------------
+            small.setVisible(false);
+            red.setVisible(false);
+            strong.setVisible(false);
+            green.setVisible(false);
+        } else if (getPasNo > 6) {
+            strong.setVisible(true);
+            green.setVisible(true);
+            //----------------------
+            small.setVisible(false);
+            red.setVisible(false);
+            medium.setVisible(false);
+            blue.setVisible(false);
+
+        }
+    }//GEN-LAST:event_txt_newPasKeyPressed
+
+    private void txt_currPasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_currPasKeyPressed
+    }//GEN-LAST:event_txt_currPasKeyPressed
+
+    private void txt_currPasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_currPasKeyReleased
+        int getCurPasNo = new String(txt_currPas.getPassword()).length();
+        if (getCurPasNo < 1) {
+            txt_newPas.setVisible(false);
+            txt_confirmPas.setVisible(false);
+        } else {
+            txt_newPas.setVisible(true);
+            txt_confirmPas.setVisible(true);
+        }
+    }//GEN-LAST:event_txt_currPasKeyReleased
+
+    private void txt_currPasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_currPasKeyTyped
+    }//GEN-LAST:event_txt_currPasKeyTyped
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        try {
+            DBConnection.setConnection().createStatement().executeUpdate("UPDATE usertype set user_picture='" + jpath + "' WHERE user_nic=(SELECT userType_user_nic FROM login WHERE username='" + accUserName + "')");
+            JOptionPane.showMessageDialog(this, "User Account picture updated succesfully", "Message", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        try {
+            JFileChooser jf = new JFileChooser();
+            jf.showOpenDialog(this);
+            File f = jf.getSelectedFile();
+            String path = f.getAbsolutePath();
+            jpath = path.replace("\\", "/");
+            //--------set selected file to desktopPane 
+            File ff = new File(path);
+            Image img = ImageIO.read(ff);
+            img = img.getScaledInstance(image3.getWidth(), image3.getHeight(), Image.SCALE_SMOOTH);
+            image3.setIcon(new ImageIcon(img));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        changeAccPic.setVisible(true);
+        userpicChange.setText(accUserName);
+        UserAccounts.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -384,11 +562,15 @@ public class ControlPanel1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane ControlPanel;
     private javax.swing.JLayeredPane UserAccounts;
+    private javax.swing.JLabel blue;
+    private javax.swing.JLayeredPane changeAccPic;
     private javax.swing.JLayeredPane changePassword;
     private javax.swing.JLayeredPane changeUserName;
+    private javax.swing.JLabel green;
     private javax.swing.JLabel image;
     private javax.swing.JLabel image1;
     private javax.swing.JLabel image2;
+    private javax.swing.JLabel image3;
     private javax.swing.JLabel invalidCurPas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -397,9 +579,12 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JDesktopPane jDesktopPane3;
+    private javax.swing.JDesktopPane jDesktopPane4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -407,22 +592,38 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel medium;
     private javax.swing.JLabel pdmatch;
     private javax.swing.JLabel pmatch;
+    private javax.swing.JLabel red;
+    private javax.swing.JLabel small;
+    private javax.swing.JLabel strong;
     private javax.swing.JPasswordField txt_confirmPas;
     private javax.swing.JPasswordField txt_currPas;
     private javax.swing.JPasswordField txt_newPas;
     private javax.swing.JTextField txt_userName;
     private javax.swing.JLabel username;
+    private javax.swing.JLabel userpicChange;
     // End of variables declaration//GEN-END:variables
 
     public void visibility() {
+        //-------------password warnings visibility------------
         pdmatch.setVisible(false);
         pmatch.setVisible(false);
         invalidCurPas.setVisible(false);
+        //-------------jlayeredpane visibility-----------------
         changeUserName.setVisible(false);
         changePassword.setVisible(false);
+        changeAccPic.setVisible(false);
+        //-------------password strength checking visibility---
+        small.setVisible(false);
+        medium.setVisible(false);
+        strong.setVisible(false);
+
+        red.setVisible(false);
+        blue.setVisible(false);
+        green.setVisible(false);
     }
 
     public void setNullAll() {
@@ -431,6 +632,7 @@ public class ControlPanel1 extends javax.swing.JFrame {
         txt_userName.setText(null);
     }
 
+    //---------------retriving userPicture----------------------------------
     class A extends javax.swing.JFrame {
 
         public void getPicture(String n) {
@@ -441,9 +643,34 @@ public class ControlPanel1 extends javax.swing.JFrame {
                     Image im = bi.getScaledInstance(image.getWidth(), image.getHeight(), Image.SCALE_SMOOTH);
                     image.setIcon(new ImageIcon(im));
                 }
+                username.setText(accUserName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
+    //----------disable text fields in changing userName-----------------------
+    public void disableTextFields() {
+        int getCurPasNo = new String(txt_currPas.getPassword()).length();
+        if (getCurPasNo < 1) {
+            txt_newPas.setVisible(false);
+            txt_confirmPas.setVisible(false);
+        } else {
+            txt_newPas.setVisible(true);
+            txt_confirmPas.setVisible(true);
+        }
+    }
+
+    //----------------methods--------------------------------------------------
+    public void methods() {
+        visibility();
+        disableTextFields();
+        A a = new A();
+        a.getPicture("a");
+
+    }
+    //----------------global variables-----------------------------------------
+    String jpath;
+    String accUserName;//get the user name currently loged into
 }
