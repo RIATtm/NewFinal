@@ -26,6 +26,9 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+   
+    
+    
     public Login() {
         initComponents();
     }
@@ -122,27 +125,30 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed
-//        try {
-//            ResultSet rs = db.con().createStatement().executeQuery("SELECT *FROM Login WHERE username='" + txt_userName.getText() + "' AND password='" + new String(txt_password.getPassword()) + "'");
-//            if (rs.next()) {
-//                //login statement
-//            } else {
-//                i++;
-//                JOptionPane.showMessageDialog(this, "Username and Password did not match", "Warning", JOptionPane.WARNING_MESSAGE);
-//                if (i == 3) {
-//                    int reply = JOptionPane.showConfirmDialog(this, "<html>You have reached the maximum number if errors<br>Do you wish to try again??</html>", "Confirmation message", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
-//                    if (reply == JOptionPane.YES_OPTION) {
-//                        txt_userName.setText(null);
-//                        txt_password.setText(null);
-//                        i=0;
-//                    } else if (reply == JOptionPane.NO_OPTION) {
-//                        this.dispose();
-//                    }
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT *FROM Login WHERE username='" + txt_userName.getText() + "' AND password='" + new String(txt_password.getPassword()) + "'");
+            if (rs.next()) {
+                ControlPanel1 cp=new ControlPanel1(user);
+                AWTUtilities.setWindowOpaque(cp, false);
+                this.dispose();
+                cp.setVisible(true);
+            } else {
+                i++;
+                JOptionPane.showMessageDialog(this, "Username and Password did not match", "Warning", JOptionPane.WARNING_MESSAGE);
+                if (i == 3) {
+                    int reply = JOptionPane.showConfirmDialog(this, "<html>You have reached the maximum number if errors<br>Do you wish to try again??</html>", "Confirmation message", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+                    if (reply == JOptionPane.YES_OPTION) {
+                        txt_userName.setText(null);
+                        txt_password.setText(null);
+                        i=0;
+                    } else if (reply == JOptionPane.NO_OPTION) {
+                        this.dispose();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_signInActionPerformed
 
     private void txt_userNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_userNameFocusLost
@@ -239,5 +245,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txt_userName;
     private javax.swing.JLabel woodyPad;
     // End of variables declaration//GEN-END:variables
-//    int i = 0;
+   int i = 0;
 }

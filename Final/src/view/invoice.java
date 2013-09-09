@@ -121,11 +121,11 @@ public class invoice extends javax.swing.JFrame {
             }
         });
         txt_waiterno.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_waiternoKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_waiternoKeyReleased(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_waiternoKeyPressed(evt);
             }
         });
         txt_waiterno.setBounds(470, 130, 200, 30);

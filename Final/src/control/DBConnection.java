@@ -14,7 +14,7 @@ import java.sql.DriverManager;
 public class DBConnection {
     public static Connection setConnection()throws Exception{
         Class.forName("com.mysql.jdbc.Driver");
-        Connection c=DriverManager.getConnection("jdbc:mysql://localhost:3308/neelagiri","root","123");
+        Connection c=DriverManager.getConnection("jdbc:mysql://localhost:3308/viva","root","123");
         return c;
     }
 }
