@@ -4,7 +4,11 @@
  */
 package view;
 
+import com.sun.awt.AWTUtilities;
+import java.awt.Point;
 import java.sql.ResultSet;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 import model.Queries;
 import model.quaries;
 
@@ -42,6 +46,7 @@ public class userssearch extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,7 +61,7 @@ public class userssearch extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jScrollPane1.setBounds(270, 220, 890, 310);
+        jScrollPane1.setBounds(250, 260, 910, 270);
         jLayeredPane1.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton1.setText("Managers");
@@ -143,6 +148,8 @@ public class userssearch extends javax.swing.JFrame {
         });
         jButton7.setBounds(170, 610, 110, 23);
         jLayeredPane1.add(jButton7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setBounds(630, 120, 120, 130);
+        jLayeredPane1.add(jDesktopPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search1.png"))); // NOI18N
         jLabel1.setBounds(0, 0, 1370, 770);
@@ -167,7 +174,31 @@ public class userssearch extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+         try {
+            DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+            String idnic = txtnic.getText();
+            ResultSet rs = quaries.searchusers("test", "idtest", txtnic.getText());
+            Vector v = new Vector();
+            while (rs.next()) {
+                v.add(rs.getString(1));
+                v.add(rs.getString(2));
+                v.add(rs.getString(3));
+                v.add(rs.getString(4));
+                v.add(rs.getString(5));
+                v.add(rs.getString(6));
+            
+                
+                dt.addRow(v);
+            }
+           String s=dt.getValueAt(jTable1.getSelectedRow(), 0).toString();
+            System.out.println(s);
+            ResultSet pic=quaries.searchusers("user", "id", s);
+            if(pic.next()){
+                pic.getString("pic");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -192,7 +223,7 @@ public class userssearch extends javax.swing.JFrame {
             if (txtnic.getText().lastIndexOf(" v") == -1) {
                 txtnic.setText(txtnic.getText() + " v");
             }
-           
+
         }
     }//GEN-LAST:event_txtnicKeyReleased
 
@@ -206,8 +237,27 @@ public class userssearch extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         try {
-            String idnic =txtnic.getText();
-             ResultSet rs = quaries.searchusers("", idnic, idnic);
+            DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+            String idnic = txtnic.getText();
+            ResultSet rs = quaries.searchusers("test", "idtest", txtnic.getText());
+            Vector v = new Vector();
+            while (rs.next()) {
+                v.add(rs.getString(1));
+                v.add(rs.getString(2));
+                v.add(rs.getString(3));
+                v.add(rs.getString(4));
+                v.add(rs.getString(5));
+                v.add(rs.getString(6));
+            
+                
+                dt.addRow(v);
+            }
+           String s=dt.getValueAt(jTable1.getSelectedRow(), 0).toString();
+            System.out.println(s);
+            ResultSet pic=quaries.searchusers("user", "id", s);
+            if(pic.next()){
+                pic.getString("pic");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -251,7 +301,9 @@ public class userssearch extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new userssearch().setVisible(true);
+                userssearch s = new userssearch();
+                AWTUtilities.setWindowOpaque(s, false);
+                s.setVisible(true);
             }
         });
     }
@@ -264,6 +316,7 @@ public class userssearch extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;

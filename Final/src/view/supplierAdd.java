@@ -4,6 +4,9 @@
  */
 package view;
 
+import com.sun.awt.AWTUtilities;
+import model.quaries;
+
 /**
  *
  * @author Naveen
@@ -34,9 +37,14 @@ public class supplierAdd extends javax.swing.JFrame {
         txtmobile = new javax.swing.JTextField();
         txthome = new javax.swing.JTextField();
         txtaddress = new javax.swing.JTextField();
+        txtcomname = new javax.swing.JTextField();
+        txtcomadd = new javax.swing.JTextField();
+        txtcomcon = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         txtnic.setBackground(new java.awt.Color(247, 247, 247));
         txtnic.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -107,7 +115,31 @@ public class supplierAdd extends javax.swing.JFrame {
         txtaddress.setBounds(370, 430, 330, 30);
         jLayeredPane1.add(txtaddress, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/waiteradd..png"))); // NOI18N
+        txtcomname.setBackground(new java.awt.Color(247, 247, 247));
+        txtcomname.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtcomname.setBounds(360, 560, 310, 30);
+        jLayeredPane1.add(txtcomname, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        txtcomadd.setBackground(new java.awt.Color(247, 247, 247));
+        txtcomadd.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtcomadd.setBounds(360, 600, 320, 30);
+        jLayeredPane1.add(txtcomadd, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        txtcomcon.setBackground(new java.awt.Color(247, 247, 247));
+        txtcomcon.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtcomcon.setBounds(360, 520, 300, 30);
+        jLayeredPane1.add(txtcomcon, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton2.setText("Save");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jButton2.setBounds(800, 650, 57, 23);
+        jLayeredPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/supplier-Recovered.png"))); // NOI18N
         jLabel1.setBounds(0, 0, 1366, 768);
         jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -202,6 +234,27 @@ public class supplierAdd extends javax.swing.JFrame {
     private void txtmobileKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyReleased
 
     }//GEN-LAST:event_txtmobileKeyReleased
+String m=" ";
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        try {
+
+            if (jbm.isSelected()) {
+                m = jbm.getText();
+            } else if (jbf.isSelected()) {
+                m = jbf.getText();
+
+            }
+            String name = ttname.getText();
+            String feild[] = {txtnic.getText(), name , m, txtmobile.getText(), txthome.getText(), txtaddress.getText(), txtcomname.getText(), txtcomadd.getText(), txtcomcon.getText()};
+            quaries.supsave("supplier", feild);
+
+            //        String[] ar={"123"z,"123","123","123","123","123","123","123","123","123","123"};
+            //        quaries.autosave("usertype", ar);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,17 +286,23 @@ public class supplierAdd extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new supplierAdd().setVisible(true);
+                supplierAdd s = new supplierAdd();
+                AWTUtilities.setWindowOpaque(s, false);
+                s.setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     public static javax.swing.JRadioButton jbf;
     public static javax.swing.JRadioButton jbm;
     public static javax.swing.JTextField ttname;
     public static javax.swing.JTextField txtaddress;
+    public static javax.swing.JTextField txtcomadd;
+    public static javax.swing.JTextField txtcomcon;
+    public static javax.swing.JTextField txtcomname;
     public static javax.swing.JTextField txthome;
     public static javax.swing.JTextField txtmobile;
     private javax.swing.JTextField txtnic;

@@ -4,6 +4,8 @@
  */
 package view;
 
+import model.quaries;
+
 /**
  *
  * @author Naveen
@@ -34,6 +36,7 @@ public class waiterAdd extends javax.swing.JFrame {
         txtmobile = new javax.swing.JTextField();
         txthome = new javax.swing.JTextField();
         txtaddress = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,6 +109,15 @@ public class waiterAdd extends javax.swing.JFrame {
         txtaddress.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtaddress.setBounds(360, 430, 340, 30);
         jLayeredPane1.add(txtaddress, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton2.setText("Save");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jButton2.setBounds(780, 570, 57, 23);
+        jLayeredPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/waiteradd..png"))); // NOI18N
         jLabel1.setBounds(0, 0, 1366, 768);
@@ -202,6 +214,26 @@ public class waiterAdd extends javax.swing.JFrame {
     private void txtmobileKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyReleased
 
     }//GEN-LAST:event_txtmobileKeyReleased
+String m ="";
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+
+            if (jbm.isSelected()) {
+                m = jbm.getText();
+            } else if (jbf.isSelected()) {
+                m = jbf.getText();
+
+            }
+            String[] name = ttname.getText().split(" ");
+            String feild[] = {txtnic.getText(), name[0], name[1], m, txtmobile.getText(), txthome.getText(), txtaddress.getText(), "dsds"};
+            quaries.waitersave("waiter", feild);
+
+            //        String[] ar={"123"z,"123","123","123","123","123","123","123","123","123","123"};
+            //        quaries.autosave("usertype", ar);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,6 +270,7 @@ public class waiterAdd extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     public static javax.swing.JRadioButton jbf;
