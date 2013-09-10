@@ -19,6 +19,7 @@ public class Login extends javax.swing.JFrame {
     private String user;
     private String password;
     boolean access;
+
     /**
      * Creates new form Login
      */
@@ -123,8 +124,8 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed
-        
-if (txt_userName.getText().isEmpty() || new String(txt_password.getPassword()).isEmpty()) {
+
+        if (txt_userName.getText().isEmpty() || new String(txt_password.getPassword()).isEmpty()) {
             JOptionPane.showMessageDialog(null, "Username or Password Cannot be Empty !!");
         } else {
             if (user == null && password == null) {
@@ -236,14 +237,32 @@ if (txt_userName.getText().isEmpty() || new String(txt_password.getPassword()).i
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Fully Database is Crashed OUT!!");//----********** IF DB DOSEN'T EXISTS *************-------------
             txt_password.setVisible(false);
-            
+
         }
     }//GEN-LAST:event_txt_userNameFocusLost
 
     private void txt_passwordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_passwordFocusLost
-        if (password.equals(new String(txt_password.getPassword()))) {
-            System.out.println(user + " : " + password);
+        if (user == null && password == null) {
+            if(txt_userName==null){
+                JOptionPane.showMessageDialog(this, "Username cannot be null", "Message", JOptionPane.WARNING_MESSAGE);
+            }
+            if(txt_password==null){
+                JOptionPane.showMessageDialog(this, "Password cannot be null", "Message", JOptionPane.WARNING_MESSAGE);
+            }
+            if(txt_userName==null && txt_password==null){
+                JOptionPane.showMessageDialog(this, "Username and Password cannot be null", "Message", JOptionPane.WARNING_MESSAGE);
+            }
+            JOptionPane.showMessageDialog(this, "Username you enterd is incorrect", "Message", JOptionPane.WARNING_MESSAGE);
+        } else if (user == null && password == null ) {
+            JOptionPane.showMessageDialog(this, "Username and Password cannot be null", "Message", JOptionPane.ERROR_MESSAGE);
+        } else if (password.equals(new String(txt_password.getPassword()))) {
             access = true;
+        } else if (password == null || user != null) {
+            JOptionPane.showMessageDialog(this, "Password cannot be null", "Message", JOptionPane.WARNING_MESSAGE);
+        } else if (password != null || user == null) {
+            JOptionPane.showMessageDialog(this, "Username cannot be null", "Message", JOptionPane.WARNING_MESSAGE);
+        } else {
+            System.out.println("hgv");
         }
     }//GEN-LAST:event_txt_passwordFocusLost
 
