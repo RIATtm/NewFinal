@@ -51,6 +51,11 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private void initComponents() {
 
         ControlPanel = new javax.swing.JLayeredPane();
+        controlHome = new javax.swing.JLayeredPane();
+        jButton16 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
         otherAccounts = new javax.swing.JLayeredPane();
         jDesktopPane5 = new javax.swing.JDesktopPane();
         userPIc = new javax.swing.JLabel();
@@ -117,15 +122,43 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+
+        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userAccounts.png"))); // NOI18N
+        jButton16.setContentAreaFilled(false);
+        jButton16.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userAccountsg.png"))); // NOI18N
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
+        jButton16.setBounds(290, 220, 340, 110);
+        controlHome.add(jButton16, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/pro.png"))); // NOI18N
+        jButton15.setContentAreaFilled(false);
+        jButton15.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userAccountsg.png"))); // NOI18N
+        jButton15.setBounds(800, 220, 340, 110);
+        controlHome.add(jButton15, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/personalize.png"))); // NOI18N
+        jButton13.setContentAreaFilled(false);
+        jButton13.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/personalizeg.png"))); // NOI18N
+        jButton13.setBounds(750, 400, 340, 110);
+        controlHome.add(jButton13, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/sounds.png"))); // NOI18N
+        jButton14.setContentAreaFilled(false);
+        jButton14.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/soundsg.png"))); // NOI18N
+        jButton14.setBounds(230, 400, 340, 110);
+        controlHome.add(jButton14, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        controlHome.setBounds(0, 0, 1366, 768);
+        ControlPanel.add(controlHome, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         userPIc.setBounds(0, 0, 220, 200);
         jDesktopPane5.add(userPIc, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -565,30 +598,6 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jButton11.setBounds(10, 0, 73, 23);
         ControlPanel.add(jButton11, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/personalize.png"))); // NOI18N
-        jButton13.setContentAreaFilled(false);
-        jButton13.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/personalizeg.png"))); // NOI18N
-        jButton13.setBounds(750, 400, 340, 110);
-        ControlPanel.add(jButton13, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/sounds.png"))); // NOI18N
-        jButton14.setContentAreaFilled(false);
-        jButton14.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/soundsg.png"))); // NOI18N
-        jButton14.setBounds(230, 400, 340, 110);
-        ControlPanel.add(jButton14, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/pro.png"))); // NOI18N
-        jButton15.setContentAreaFilled(false);
-        jButton15.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userAccountsg.png"))); // NOI18N
-        jButton15.setBounds(800, 220, 340, 110);
-        ControlPanel.add(jButton15, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userAccounts.png"))); // NOI18N
-        jButton16.setContentAreaFilled(false);
-        jButton16.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userAccountsg.png"))); // NOI18N
-        jButton16.setBounds(290, 220, 340, 110);
-        ControlPanel.add(jButton16, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/homePanel.png"))); // NOI18N
         jLabel12.setBounds(0, 0, 1366, 768);
         ControlPanel.add(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -855,34 +864,39 @@ public class ControlPanel1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        ControlPanel.setVisible(true);
+        controlHome.setVisible(true);
         otherAccounts.setVisible(false);
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        ControlPanel.setVisible(true);
+        controlHome.setVisible(true);
         changePassword.setVisible(false);
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        ControlPanel.setVisible(true);
+        controlHome.setVisible(true);
         changeUserName.setVisible(false);
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        ControlPanel.setVisible(true);
+        controlHome.setVisible(true);
         changeAccPic.setVisible(false);
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-        ControlPanel.setVisible(true);
+        controlHome.setVisible(true);
         deleteOwnAcc.setVisible(false);
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-        ControlPanel.setVisible(true);
+        controlHome.setVisible(true);
         UserAccounts.setVisible(false);
     }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        UserAccounts.setVisible(true);
+        controlHome.setVisible(false);
+    }//GEN-LAST:event_jButton16ActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -927,6 +941,7 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JLayeredPane changeAccPic;
     private javax.swing.JLayeredPane changePassword;
     private javax.swing.JLayeredPane changeUserName;
+    private javax.swing.JLayeredPane controlHome;
     private javax.swing.JComboBox delStatus;
     private javax.swing.JLayeredPane deleteOwnAcc;
     private javax.swing.JLabel green;
@@ -1007,6 +1022,7 @@ public class ControlPanel1 extends javax.swing.JFrame {
         changeAccPic.setVisible(false);
         deleteOwnAcc.setVisible(false);
         otherAccounts.setVisible(false);
+        UserAccounts.setVisible(false);
 
         //--------delete button visibility @ textArealayeredPane-----
 
