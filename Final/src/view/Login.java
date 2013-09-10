@@ -18,7 +18,7 @@ public class Login extends javax.swing.JFrame {
 
     private String user;
     private String password;
-
+    boolean access;
     /**
      * Creates new form Login
      */
@@ -52,6 +52,11 @@ public class Login extends javax.swing.JFrame {
         txt_password.setBorder(null);
         txt_password.setDisabledTextColor(new java.awt.Color(237, 228, 212));
         txt_password.setOpaque(false);
+        txt_password.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_passwordFocusLost(evt);
+            }
+        });
         txt_password.setBounds(200, 185, 200, 30);
         fieldPane.add(txt_password, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -118,126 +123,129 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed
-        try {
-            ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM userHistory WHERE userType_user_nic=(SELECT userType_user_nic FROM login WHERE username='" + txt_userName.getText() + "' AND password='"+new String(txt_password.getPassword())+"')");
-            if (rs.next()) {
-                loginStatus = rs.getString("delStatus");
-
-                //------------------------------------------------
-                if (loginStatus.equals("Temporaly")) {
-                    int lReply = JOptionPane.showConfirmDialog(this, "Your account has been deleted temporaly \n do you want to restore the account again?", "Message", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-                    if (lReply == JOptionPane.YES_OPTION) {
-                        try {
-                            ResultSet rss = DBConnection.setConnection().createStatement().executeQuery("SELECT *FROM Login WHERE username='" + txt_userName.getText() + "' AND password='" + new String(txt_password.getPassword()) + "'");
-                            if (rss.next()) {
-                                ControlPanel1 cp = new ControlPanel1(user);
-                                AWTUtilities.setWindowOpaque(cp, false);
-                                this.dispose();
-                                cp.setVisible(true);
-                            } else {
-                                i++;
-                                JOptionPane.showMessageDialog(this, "Username and Password did not match", "Warning", JOptionPane.WARNING_MESSAGE);
-                                if (i == 3) {
-                                    int reply = JOptionPane.showConfirmDialog(this, "<html>You have reached the maximum number if errors<br>Do you wish to try again??</html>", "Confirmation message", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
-                                    if (reply == JOptionPane.YES_OPTION) {
-                                        txt_userName.setText(null);
-                                        txt_password.setText(null);
-                                        i = 0;
-                                    } else if (reply == JOptionPane.NO_OPTION) {
-                                        this.dispose();
-                                    }
-                                }
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else if (lReply == JOptionPane.NO_OPTION) {
-                        this.dispose();
-                    }
-                } else if (loginStatus.equals("Permenantly")) {
-                    JOptionPane.showMessageDialog(this, "Sorry you don't have permissions to login to the system", "Message", JOptionPane.ERROR_MESSAGE);
-                    this.dispose();
-                }
-            } else {
-                try {
-                    ResultSet rrs = DBConnection.setConnection().createStatement().executeQuery("SELECT *FROM Login WHERE username='" + txt_userName.getText() + "' AND password='" + new String(txt_password.getPassword()) + "'");
-                    if (rrs.next()) {
-                        ControlPanel1 cp = new ControlPanel1(user);
-                        AWTUtilities.setWindowOpaque(cp, false);
-                        this.dispose();
-                        cp.setVisible(true);
-                    } else {
-                        i++;
-                        JOptionPane.showMessageDialog(this, "Username and Password did not match", "Warning", JOptionPane.WARNING_MESSAGE);
-                        if (i == 3) {
-                            int reply = JOptionPane.showConfirmDialog(this, "<html>You have reached the maximum number if errors<br>Do you wish to try again??</html>", "Confirmation message", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
-                            if (reply == JOptionPane.YES_OPTION) {
-                                txt_userName.setText(null);
-                                txt_password.setText(null);
-                                i = 0;
-                            } else if (reply == JOptionPane.NO_OPTION) {
-                                this.dispose();
-                            }
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
-
-    }//GEN-LAST:event_signInActionPerformed
-    private void txt_userNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_userNameFocusLost
-        if (txt_userName.getText().isEmpty()) {
-            System.err.println("Username is Empty !");
+        
+if (txt_userName.getText().isEmpty() || new String(txt_password.getPassword()).isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username or Password Cannot be Empty !!");
         } else {
-            try {
-                ResultSet rs = Queries.autoSearch("login", "username", txt_userName.getText());
-                if (rs.next()) {
-                    user = rs.getString("username");
-                    password = rs.getString("password");
-                } else {
-                    //--------------------------------------------------------------------IF DB DOESN'T EXIST AUTO INSERT QUERIES AND CHECK WHETHER DATA CAN SAVE IF DOSENT MEANS DATABASE CRASED--------------
-
+            if (user == null && password == null) {
+                try {
                     ResultSet auto = Queries.autoSearch("login", "username", "autoGen");
                     if (auto.next()) {
-                        JOptionPane.showMessageDialog(null, "Invalid Username !");
+                        JOptionPane.showMessageDialog(null, "Invalid Username or Password 1!");
                     } else {
-                        try {
-                            int getExecute = DBConnection.setConnection().createStatement().executeUpdate("INSERT INTO login VALUES ('" + "autoGen" + "','" + "hotel" + "','" + "" + "','" + "Software" + "')");
-
-                            if (getExecute > 0) {
-                                ResultSet getAutoGen = Queries.autoSearch("login", "username", "autoGen");
-                                if (getAutoGen.next()) {
-                                    System.out.println("restored");
-                                    //-----------------------------------------------------------------SET DB retstore from computer ****otherwise email****-------------------------------------
-                                    //-----------------------------------------------------------------if DB retstore cannot SEND MESSAGE TO ADMIN-------------------------------------
-                                    //--------------------------AFTER RESTORE FORCED MANAGER/ADMIN ABOUT THIS AND TELL WORK IT FROM PREVIOUS BACKUP-------------------------
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "Database is Hacked,\n No data available in the database !!");
-                                    txt_password.setVisible(false);
-                                    //-----------------------------------------------------------------SEND MESSEGE TO ADMIN----------------------------------------
-                                }
-                            }
-                        } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(null, "Database is Crashed !!");
-                            txt_password.setVisible(false);
-                            //-----------------------------------------------------------------SEND MESSEGE TO ADMIN----------------------------------------
-                        }
+                        JOptionPane.showMessageDialog(null, "Database is Crashed !!");
+                        txt_password.setVisible(false);
                     }
+
+                } catch (Exception e) {
+
+                    JOptionPane.showMessageDialog(null, "Database is Crashed !!");
+                    txt_password.setVisible(false);
+                    //-------------------------------Admin
                 }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Fully Database is Crashed OUT!!");//----********** IF DB DOSEN'T EXISTS *************-------------
-                txt_password.setVisible(false);
-                //-----------------------------------------------------------------SEND MESSEGE TO ADMIN----------------------------------------
+            } else {
+                if (access) {
+                    //----------------------------------------------------------
+
+                    try {
+                        ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM userHistory WHERE userType_user_nic=(SELECT userType_user_nic FROM login WHERE username='" + txt_userName.getText() + "' AND password='" + new String(txt_password.getPassword()) + "')");
+                        if (rs.next()) {
+                            loginStatus = rs.getString("delStatus");
+
+                            //------------------------------------------------
+                            if (loginStatus.equals("Temporaly")) {
+                                int lReply = JOptionPane.showConfirmDialog(this, "Your account has been deleted temporaly \n do you want to restore the account again?", "Message", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                                if (lReply == JOptionPane.YES_OPTION) {
+                                    try {
+                                        ResultSet rss = DBConnection.setConnection().createStatement().executeQuery("SELECT *FROM Login WHERE username='" + txt_userName.getText() + "' AND password='" + new String(txt_password.getPassword()) + "'");
+                                        if (rss.next()) {
+                                            ControlPanel1 cp = new ControlPanel1(user);
+                                            AWTUtilities.setWindowOpaque(cp, false);
+                                            this.dispose();
+                                            cp.setVisible(true);
+                                        } else {
+                                            i++;
+                                            JOptionPane.showMessageDialog(this, "Username and Password did not match", "Warning", JOptionPane.WARNING_MESSAGE);
+                                            if (i == 3) {
+                                                int reply = JOptionPane.showConfirmDialog(this, "<html>You have reached the maximum number if errors<br>Do you wish to try again??</html>", "Confirmation message", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+                                                if (reply == JOptionPane.YES_OPTION) {
+                                                    txt_userName.setText(null);
+                                                    txt_password.setText(null);
+                                                    i = 0;
+                                                } else if (reply == JOptionPane.NO_OPTION) {
+                                                    this.dispose();
+                                                }
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                } else if (lReply == JOptionPane.NO_OPTION) {
+                                    this.dispose();
+                                }
+                            } else if (loginStatus.equals("Permenantly")) {
+                                JOptionPane.showMessageDialog(this, "Sorry you don't have permissions to login to the system", "Message", JOptionPane.ERROR_MESSAGE);
+                                this.dispose();
+                            }
+                        } else {
+                            try {
+                                ResultSet rrs = DBConnection.setConnection().createStatement().executeQuery("SELECT *FROM Login WHERE username='" + txt_userName.getText() + "' AND password='" + new String(txt_password.getPassword()) + "'");
+                                if (rrs.next()) {
+                                    ControlPanel1 cp = new ControlPanel1(user);
+                                    AWTUtilities.setWindowOpaque(cp, false);
+                                    this.dispose();
+                                    cp.setVisible(true);
+                                } else {
+                                    i++;
+                                    JOptionPane.showMessageDialog(this, "Username and Password did not match", "Warning", JOptionPane.WARNING_MESSAGE);
+                                    if (i == 3) {
+                                        int reply = JOptionPane.showConfirmDialog(this, "<html>You have reached the maximum number if errors<br>Do you wish to try again??</html>", "Confirmation message", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+                                        if (reply == JOptionPane.YES_OPTION) {
+                                            txt_userName.setText(null);
+                                            txt_password.setText(null);
+                                            i = 0;
+                                        } else if (reply == JOptionPane.NO_OPTION) {
+                                            this.dispose();
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+                    //----------------------------------------------------------
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid Username or Password 2!");
+                }
             }
         }
+    }//GEN-LAST:event_signInActionPerformed
+
+    private void txt_userNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_userNameFocusLost
+        try {
+            ResultSet rs = Queries.autoSearch("login", "username", txt_userName.getText());
+            if (rs.next()) {
+                user = rs.getString("username");
+                password = rs.getString("password");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Fully Database is Crashed OUT!!");//----********** IF DB DOSEN'T EXISTS *************-------------
+            txt_password.setVisible(false);
+            
+        }
     }//GEN-LAST:event_txt_userNameFocusLost
+
+    private void txt_passwordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_passwordFocusLost
+        if (password.equals(new String(txt_password.getPassword()))) {
+            System.out.println(user + " : " + password);
+            access = true;
+        }
+    }//GEN-LAST:event_txt_passwordFocusLost
 
     /**
      * @param args the command line arguments
