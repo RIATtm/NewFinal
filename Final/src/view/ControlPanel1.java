@@ -108,8 +108,6 @@ public class ControlPanel1 extends javax.swing.JFrame {
         i1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jDesktopPane6 = new javax.swing.JDesktopPane();
-        i2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
@@ -426,10 +424,10 @@ public class ControlPanel1 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        i1.setBounds(0, 0, 140, 130);
+        i1.setBounds(0, 0, 220, 200);
         jDesktopPane5.add(i1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jDesktopPane5.setBounds(300, 100, 140, 130);
+        jDesktopPane5.setBounds(330, 150, 220, 200);
         otherAccounts.add(jDesktopPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -437,20 +435,21 @@ public class ControlPanel1 extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2"
+                "User Accounts"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
-        jScrollPane2.setBounds(190, 250, 90, 402);
+        jScrollPane2.setBounds(740, 160, 300, 460);
         otherAccounts.add(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        i2.setText("jLabel13");
-        i2.setBounds(0, 0, 130, 120);
-        jDesktopPane6.add(i2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jDesktopPane6.setBounds(620, 160, 130, 120);
-        otherAccounts.add(jDesktopPane6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         otherAccounts.setBounds(0, 0, 1366, 768);
         ControlPanel.add(otherAccounts, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -767,7 +766,6 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JLayeredPane deleteOwnAcc;
     private javax.swing.JLabel green;
     private javax.swing.JLabel i1;
-    private javax.swing.JLabel i2;
     private javax.swing.JLabel image;
     private javax.swing.JLabel image1;
     private javax.swing.JLabel image2;
@@ -790,7 +788,6 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane3;
     private javax.swing.JDesktopPane jDesktopPane4;
     private javax.swing.JDesktopPane jDesktopPane5;
-    private javax.swing.JDesktopPane jDesktopPane6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
