@@ -15,11 +15,13 @@ import java.io.File;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -104,16 +106,10 @@ public class ControlPanel1 extends javax.swing.JFrame {
         otherAccounts = new javax.swing.JLayeredPane();
         jDesktopPane5 = new javax.swing.JDesktopPane();
         i1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jDesktopPane6 = new javax.swing.JDesktopPane();
         i2 = new javax.swing.JLabel();
-        jDesktopPane7 = new javax.swing.JDesktopPane();
-        i3 = new javax.swing.JLabel();
-        jDesktopPane8 = new javax.swing.JDesktopPane();
-        i4 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
@@ -430,45 +426,31 @@ public class ControlPanel1 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        i1.setBounds(0, 0, 90, 90);
+        i1.setBounds(0, 0, 140, 130);
         jDesktopPane5.add(i1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jDesktopPane5.setBounds(460, 130, 90, 90);
+        jDesktopPane5.setBounds(300, 100, 140, 130);
         otherAccounts.add(jDesktopPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        i2.setBounds(0, 0, 90, 90);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        jScrollPane2.setBounds(190, 250, 90, 402);
+        otherAccounts.add(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        i2.setText("jLabel13");
+        i2.setBounds(0, 0, 130, 120);
         jDesktopPane6.add(i2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jDesktopPane6.setBounds(910, 130, 90, 90);
+        jDesktopPane6.setBounds(620, 160, 130, 120);
         otherAccounts.add(jDesktopPane6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        i3.setBounds(0, 0, 90, 90);
-        jDesktopPane7.add(i3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jDesktopPane7.setBounds(460, 310, 90, 90);
-        otherAccounts.add(jDesktopPane7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        i4.setBounds(0, 0, 90, 90);
-        jDesktopPane8.add(i4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jDesktopPane8.setBounds(910, 310, 90, 90);
-        otherAccounts.add(jDesktopPane8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel16.setText("Username");
-        jLabel16.setBounds(730, 310, 180, 20);
-        otherAccounts.add(jLabel16, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel15.setText("Username");
-        jLabel15.setBounds(280, 310, 180, 20);
-        otherAccounts.add(jLabel15, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel13.setText("Username");
-        jLabel13.setBounds(280, 130, 180, 20);
-        otherAccounts.add(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel14.setText("Username");
-        jLabel14.setBounds(730, 130, 180, 20);
-        otherAccounts.add(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         otherAccounts.setBounds(0, 0, 1366, 768);
         ControlPanel.add(otherAccounts, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -786,8 +768,6 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JLabel green;
     private javax.swing.JLabel i1;
     private javax.swing.JLabel i2;
-    private javax.swing.JLabel i3;
-    private javax.swing.JLabel i4;
     private javax.swing.JLabel image;
     private javax.swing.JLabel image1;
     private javax.swing.JLabel image2;
@@ -811,16 +791,10 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane4;
     private javax.swing.JDesktopPane jDesktopPane5;
     private javax.swing.JDesktopPane jDesktopPane6;
-    private javax.swing.JDesktopPane jDesktopPane7;
-    private javax.swing.JDesktopPane jDesktopPane8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -830,6 +804,8 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel medium;
     private javax.swing.JLayeredPane otherAccounts;
     private javax.swing.JLabel pdmatch;
@@ -912,10 +888,20 @@ public class ControlPanel1 extends javax.swing.JFrame {
     //------------otherAccounts-------------------------------------------------
     public void getPicture() {
         try {
-            ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM usertype WHERE user_nic=(SELECT userType_user_nic FROM login)");
+            ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT u.user_type,username FROM userType u,login l WHERE u.user_nic=l.userType_user_nic");
+            DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
             while (rs.next()) {
-               
+                Vector v = new Vector();
+                v.add(rs.getString("user_type"));
+                v.add(rs.getString("username"));
+                dt.addRow(v);
+                
+                for(int a=0;a<dt.getRowCount();a++){
+                    
+                }
+                
             }
+            System.out.println(dt.getColumnCount());
             username.setText(accUserName);
         } catch (Exception e) {
             e.printStackTrace();
