@@ -29,6 +29,7 @@ public class invoice extends javax.swing.JFrame {
         initComponents();
         m();
         visible();
+        System.out.println("jgfd");
     }
 
     public void visible() {
