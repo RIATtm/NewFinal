@@ -119,7 +119,7 @@ public class Login extends javax.swing.JFrame {
 
     private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed
         try {
-            ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM userHistory WHERE userType_user_nic=(SELECT userType_user_nic FROM login WHERE username='" + txt_userName.getText() + "')");
+            ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM userHistory WHERE userType_user_nic=(SELECT userType_user_nic FROM login WHERE username='" + txt_userName.getText() + "' AND password='"+new String(txt_password.getPassword())+"')");
             if (rs.next()) {
                 loginStatus = rs.getString("delStatus");
 
