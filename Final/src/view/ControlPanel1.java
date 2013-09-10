@@ -37,7 +37,7 @@ public class ControlPanel1 extends javax.swing.JFrame {
         accUserName = currentUser;
         jLabel7.setText(accUserName);//-----setting userName into UserAccounts homePanel----
         methods(); //---calling all methods-----
-        
+
 
     }
 
@@ -106,9 +106,10 @@ public class ControlPanel1 extends javax.swing.JFrame {
         ControlPanel = new javax.swing.JLayeredPane();
         otherAccounts = new javax.swing.JLayeredPane();
         jDesktopPane5 = new javax.swing.JDesktopPane();
-        i1 = new javax.swing.JLabel();
+        userPIc = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton13 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
@@ -355,6 +356,9 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jLabel9.setBounds(0, 0, 1366, 768);
         deleteOwnAcc.add(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+
         image.setBounds(0, 0, 220, 200);
         jDesktopPane1.add(image, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -422,11 +426,8 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jLabel1.setBounds(0, 0, 1366, 768);
         UserAccounts.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-
-        i1.setBounds(0, 0, 220, 200);
-        jDesktopPane5.add(i1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        userPIc.setBounds(0, 0, 220, 200);
+        jDesktopPane5.add(userPIc, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jDesktopPane5.setBounds(330, 150, 220, 200);
         otherAccounts.add(jDesktopPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -436,21 +437,35 @@ public class ControlPanel1 extends javax.swing.JFrame {
 
             },
             new String [] {
-                "User Accounts"
+                "User Accounts", "User Type"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
-        jScrollPane2.setBounds(740, 160, 300, 460);
+        jScrollPane2.setBounds(730, 160, 310, 460);
         otherAccounts.add(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton13.setText("jButton13");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+        jButton13.setBounds(720, 80, 79, 23);
+        otherAccounts.add(jButton13, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         otherAccounts.setBounds(0, 0, 1366, 768);
         ControlPanel.add(otherAccounts, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -484,10 +499,20 @@ public class ControlPanel1 extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(ControlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1366, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(UserAccounts, javax.swing.GroupLayout.PREFERRED_SIZE, 1366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(ControlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(UserAccounts, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -719,6 +744,29 @@ public class ControlPanel1 extends javax.swing.JFrame {
         otherAccounts.setVisible(true);
         UserAccounts.setVisible(false);
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        otherAccounts.setVisible(true);
+        UserAccounts.setVisible(false);
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        //--------------------get the account picture of selected row-------
+        try {
+            DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
+
+            String getAcName = dt.getValueAt(jTable1.getSelectedRow(), 0).toString();
+            ResultSet getPic = DBConnection.setConnection().createStatement().executeQuery("SELECT user_picture FROM userType WHERE user_nic=(SELECT userType_user_nic FROM login WHERE username='" + getAcName + "')");
+            while (getPic.next()) {
+                BufferedImage bi = ImageIO.read(new File(getPic.getString("user_picture")));
+                Image im = bi.getScaledInstance(userPIc.getWidth(), userPIc.getHeight(), Image.SCALE_SMOOTH);
+                userPIc.setIcon(new ImageIcon(im));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
     /**
      * @param args the command line arguments
      */
@@ -766,7 +814,6 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JComboBox delStatus;
     private javax.swing.JLayeredPane deleteOwnAcc;
     private javax.swing.JLabel green;
-    private javax.swing.JLabel i1;
     private javax.swing.JLabel image;
     private javax.swing.JLabel image1;
     private javax.swing.JLabel image2;
@@ -776,6 +823,7 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -818,6 +866,7 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JPasswordField txt_newPas;
     private javax.swing.JTextArea txt_reason;
     private javax.swing.JTextField txt_userName;
+    private javax.swing.JLabel userPIc;
     private javax.swing.JLabel username;
     private javax.swing.JLabel userpicChange;
     // End of variables declaration//GEN-END:variables
@@ -832,6 +881,7 @@ public class ControlPanel1 extends javax.swing.JFrame {
         changePassword.setVisible(false);
         changeAccPic.setVisible(false);
         deleteOwnAcc.setVisible(false);
+        otherAccounts.setVisible(false);
 
         //--------delete button visibility @ textArealayeredPane-----
 
@@ -884,23 +934,17 @@ public class ControlPanel1 extends javax.swing.JFrame {
     }
 
     //------------otherAccounts-------------------------------------------------
-    public void getPicture() {
+    public void getOtherAccounts() {
         try {
             ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT u.user_type,username FROM userType u,login l WHERE u.user_nic=l.userType_user_nic");
             DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
             while (rs.next()) {
                 Vector v = new Vector();
-                v.add(rs.getString("user_type"));
                 v.add(rs.getString("username"));
+                v.add(rs.getString("user_type"));
                 dt.addRow(v);
-                
-                for(int a=0;a<dt.getRowCount();a++){
-                    
-                }
-                
             }
-            System.out.println(dt.getColumnCount());
-            username.setText(accUserName);
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -927,7 +971,7 @@ public class ControlPanel1 extends javax.swing.JFrame {
         A a = new A();
         a.getPicture("a");
         timer();
-        getPicture();
+        getOtherAccounts();
 
         //---------------set initial size of textAreanlayeredPane-------------
         textArealayeredPane.setSize(600, 0);
