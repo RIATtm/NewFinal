@@ -7,14 +7,19 @@ package view;
 import com.sun.awt.AWTUtilities;
 import control.DBConnection;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -30,6 +35,7 @@ public class ControlPanel1 extends javax.swing.JFrame {
         accUserName = currentUser;
         jLabel7.setText(accUserName);//-----setting userName into UserAccounts homePanel----
         methods();
+
     }
 
     /**
@@ -41,12 +47,6 @@ public class ControlPanel1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        changeUserName = new javax.swing.JLayeredPane();
-        txt_userName = new javax.swing.JTextField();
-        jDesktopPane2 = new javax.swing.JDesktopPane();
-        image1 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         changePassword = new javax.swing.JLayeredPane();
         jLabel7 = new javax.swing.JLabel();
         jDesktopPane3 = new javax.swing.JDesktopPane();
@@ -68,6 +68,12 @@ public class ControlPanel1 extends javax.swing.JFrame {
         blue = new javax.swing.JLabel();
         green = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        changeUserName = new javax.swing.JLayeredPane();
+        txt_userName = new javax.swing.JTextField();
+        jDesktopPane2 = new javax.swing.JDesktopPane();
+        image1 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         changeAccPic = new javax.swing.JLayeredPane();
         jDesktopPane4 = new javax.swing.JDesktopPane();
         image3 = new javax.swing.JLabel();
@@ -75,6 +81,15 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         userpicChange = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        deleteOwnAcc = new javax.swing.JLayeredPane();
+        delStatus = new javax.swing.JComboBox();
+        jLabel10 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        textArealayeredPane = new javax.swing.JLayeredPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txt_reason = new javax.swing.JTextArea();
+        time = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         UserAccounts = new javax.swing.JLayeredPane();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         image = new javax.swing.JLabel();
@@ -83,40 +98,26 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         ControlPanel = new javax.swing.JLayeredPane();
-        deleteOwnAcc = new javax.swing.JLayeredPane();
-        jComboBox1 = new javax.swing.JComboBox();
-        jLabel10 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton3 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-
-        txt_userName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        txt_userName.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txt_userName.setBounds(230, 210, 450, 30);
-        changeUserName.add(txt_userName, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        image1.setBounds(0, 0, 220, 200);
-        jDesktopPane2.add(image1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jDesktopPane2.setBounds(830, 200, 220, 200);
-        changeUserName.add(jDesktopPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/change_user.png"))); // NOI18N
-        jButton6.setContentAreaFilled(false);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        jButton6.setBounds(330, 280, 360, 90);
-        changeUserName.add(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userNameChange.png"))); // NOI18N
-        jLabel2.setBounds(0, 0, 1366, 768);
-        changeUserName.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        otherAccounts = new javax.swing.JLayeredPane();
+        jDesktopPane5 = new javax.swing.JDesktopPane();
+        i1 = new javax.swing.JLabel();
+        jDesktopPane6 = new javax.swing.JDesktopPane();
+        i2 = new javax.swing.JLabel();
+        jDesktopPane7 = new javax.swing.JDesktopPane();
+        i3 = new javax.swing.JLabel();
+        jDesktopPane8 = new javax.swing.JDesktopPane();
+        i4 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
 
         jLabel7.setBounds(200, 80, 150, 30);
         changePassword.add(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -257,6 +258,31 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jLabel3.setBounds(0, 0, 1366, 768);
         changePassword.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        txt_userName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txt_userName.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txt_userName.setBounds(230, 210, 450, 30);
+        changeUserName.add(txt_userName, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        image1.setBounds(0, 0, 220, 200);
+        jDesktopPane2.add(image1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jDesktopPane2.setBounds(830, 200, 220, 200);
+        changeUserName.add(jDesktopPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/change_user.png"))); // NOI18N
+        jButton6.setContentAreaFilled(false);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jButton6.setBounds(330, 280, 360, 90);
+        changeUserName.add(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userNameChange.png"))); // NOI18N
+        jLabel2.setBounds(0, 0, 1366, 768);
+        changeUserName.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         image3.setBounds(0, 0, 250, 230);
         jDesktopPane4.add(image3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -290,6 +316,49 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userNameChange.png"))); // NOI18N
         jLabel8.setBounds(0, 0, 1366, 768);
         changeAccPic.add(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        delStatus.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        delStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Temporaly", "Permenantly" }));
+        delStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delStatusActionPerformed(evt);
+            }
+        });
+        delStatus.setBounds(560, 160, 300, 40);
+        deleteOwnAcc.add(delStatus, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel10.setText("Delete Account");
+        jLabel10.setBounds(280, 150, 240, 40);
+        deleteOwnAcc.add(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/deleteaccount.png"))); // NOI18N
+        jButton3.setContentAreaFilled(false);
+        jButton3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/deleteaccountglow.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jButton3.setBounds(630, 520, 360, 90);
+        deleteOwnAcc.add(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        txt_reason.setColumns(20);
+        txt_reason.setRows(5);
+        jScrollPane1.setViewportView(txt_reason);
+
+        jScrollPane1.setBounds(0, 0, 600, 270);
+        textArealayeredPane.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        textArealayeredPane.setBounds(380, 250, 600, 270);
+        deleteOwnAcc.add(textArealayeredPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        time.setBounds(860, 60, 230, 20);
+        deleteOwnAcc.add(time, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/homePanel.png"))); // NOI18N
+        jLabel9.setBounds(0, 0, 1366, 768);
+        deleteOwnAcc.add(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         image.setBounds(0, 0, 220, 200);
         jDesktopPane1.add(image, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -345,6 +414,15 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jButton5.setBounds(250, 360, 410, 100);
         UserAccounts.add(jButton5, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        jButton12.setText("jButton12");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+        jButton12.setBounds(470, 570, 100, 23);
+        UserAccounts.add(jButton12, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/control panel.png"))); // NOI18N
         jLabel1.setBounds(0, 0, 1366, 768);
         UserAccounts.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -352,41 +430,72 @@ public class ControlPanel1 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Temporaly", "Permenantly" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        i1.setBounds(0, 0, 90, 90);
+        jDesktopPane5.add(i1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jDesktopPane5.setBounds(460, 130, 90, 90);
+        otherAccounts.add(jDesktopPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        i2.setBounds(0, 0, 90, 90);
+        jDesktopPane6.add(i2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jDesktopPane6.setBounds(910, 130, 90, 90);
+        otherAccounts.add(jDesktopPane6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        i3.setBounds(0, 0, 90, 90);
+        jDesktopPane7.add(i3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jDesktopPane7.setBounds(460, 310, 90, 90);
+        otherAccounts.add(jDesktopPane7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        i4.setBounds(0, 0, 90, 90);
+        jDesktopPane8.add(i4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jDesktopPane8.setBounds(910, 310, 90, 90);
+        otherAccounts.add(jDesktopPane8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel16.setText("Username");
+        jLabel16.setBounds(730, 310, 180, 20);
+        otherAccounts.add(jLabel16, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel15.setText("Username");
+        jLabel15.setBounds(280, 310, 180, 20);
+        otherAccounts.add(jLabel15, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel13.setText("Username");
+        jLabel13.setBounds(280, 130, 180, 20);
+        otherAccounts.add(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel14.setText("Username");
+        jLabel14.setBounds(730, 130, 180, 20);
+        otherAccounts.add(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        otherAccounts.setBounds(0, 0, 1366, 768);
+        ControlPanel.add(otherAccounts, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/homePanel.png"))); // NOI18N
+        jLabel12.setBounds(0, 0, 1366, 768);
+        ControlPanel.add(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton10.setText("jButton1");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jButton10ActionPerformed(evt);
             }
         });
-        jComboBox1.setBounds(560, 160, 300, 40);
-        deleteOwnAcc.add(jComboBox1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jButton10.setBounds(10, 30, 73, 23);
+        ControlPanel.add(jButton10, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel10.setText("Delete Account");
-        jLabel10.setBounds(280, 150, 240, 40);
-        deleteOwnAcc.add(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jScrollPane1.setBounds(370, 240, 620, 260);
-        deleteOwnAcc.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/deleteaccount.png"))); // NOI18N
-        jButton3.setContentAreaFilled(false);
-        jButton3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/deleteaccountglow.png"))); // NOI18N
-        jButton3.setBounds(630, 520, 360, 90);
-        deleteOwnAcc.add(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/homePanel.png"))); // NOI18N
-        jLabel9.setBounds(0, 0, 1366, 768);
-        deleteOwnAcc.add(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        deleteOwnAcc.setBounds(0, 0, 1366, 768);
-        ControlPanel.add(deleteOwnAcc, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jButton11.setText("jButton1");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        jButton11.setBounds(10, 0, 73, 23);
+        ControlPanel.add(jButton11, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLabel11.setBounds(0, 0, 1366, 768);
+        ControlPanel.add(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -555,11 +664,79 @@ public class ControlPanel1 extends javax.swing.JFrame {
         UserAccounts.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        if(jComboBox1.getSelectedItem()=="Temporally"){
-            
+    private void delStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delStatusActionPerformed
+        textArealayeredPane.setSize(600, 0);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int h = 0; h <= 270; h++) {
+                    textArealayeredPane.setSize(600, h);
+                }
+                try {
+                    Thread.sleep(500);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        jButton3.setVisible(true);
+    }//GEN-LAST:event_delStatusActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (delStatus.getSelectedItem() == "Temporaly") {
+            deleteStatus = "Temporaly";
+        } else if (delStatus.getSelectedItem() == "Permenantly") {
+            deleteStatus = "Permenantly";
         }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        try {
+            ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT userType_user_nic FROM login WHERE username='" + accUserName + "'");
+            while (rs.next()) {
+                nic = rs.getString("userType_user_nic");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            DBConnection.setConnection().createStatement().executeUpdate("INSERT INTO userHistory VALUES('" + nic + "','" + deleteStatus + "','" + txt_reason.getText() + "','" + time.getText() + "')");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        //        try {
+        //            BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+        //            Image img=image.getScaledInstance(image1.getWidth(), image1.getHeight(), Image.SCALE_SMOOTH);
+        //            image1.setIcon(new ImageIcon(img));
+        //
+        //        } catch (Exception e) {
+        //            e.printStackTrace();
+        //        }
+        try {
+            BufferedImage image = ImageIO.read(new File("C:\\Users\\Naveen\\Pictures\\Camera Roll/Chrysanthemum.jpg"));
+            Image img = image.getScaledInstance(jLabel11.getWidth(), jLabel11.getHeight(), Image.SCALE_SMOOTH);
+            jLabel11.setIcon(new ImageIcon(img));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        try {
+            BufferedImage image = ImageIO.read(new File("C:\\Users\\Naveen\\Pictures\\Camera Roll/Penguins.jpg"));
+            Image img = image.getScaledInstance(jLabel11.getWidth(), jLabel11.getHeight(), Image.SCALE_SMOOTH);
+            jLabel11.setIcon(new ImageIcon(img));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        otherAccounts.setVisible(true);
+        UserAccounts.setVisible(false);
+    }//GEN-LAST:event_jButton12ActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -604,14 +781,22 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JLayeredPane changeAccPic;
     private javax.swing.JLayeredPane changePassword;
     private javax.swing.JLayeredPane changeUserName;
+    private javax.swing.JComboBox delStatus;
     private javax.swing.JLayeredPane deleteOwnAcc;
     private javax.swing.JLabel green;
+    private javax.swing.JLabel i1;
+    private javax.swing.JLabel i2;
+    private javax.swing.JLabel i3;
+    private javax.swing.JLabel i4;
     private javax.swing.JLabel image;
     private javax.swing.JLabel image1;
     private javax.swing.JLabel image2;
     private javax.swing.JLabel image3;
     private javax.swing.JLabel invalidCurPas;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -620,13 +805,22 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JDesktopPane jDesktopPane3;
     private javax.swing.JDesktopPane jDesktopPane4;
+    private javax.swing.JDesktopPane jDesktopPane5;
+    private javax.swing.JDesktopPane jDesktopPane6;
+    private javax.swing.JDesktopPane jDesktopPane7;
+    private javax.swing.JDesktopPane jDesktopPane8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -636,16 +830,19 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel medium;
+    private javax.swing.JLayeredPane otherAccounts;
     private javax.swing.JLabel pdmatch;
     private javax.swing.JLabel pmatch;
     private javax.swing.JLabel red;
     private javax.swing.JLabel small;
     private javax.swing.JLabel strong;
+    private javax.swing.JLayeredPane textArealayeredPane;
+    private javax.swing.JLabel time;
     private javax.swing.JPasswordField txt_confirmPas;
     private javax.swing.JPasswordField txt_currPas;
     private javax.swing.JPasswordField txt_newPas;
+    private javax.swing.JTextArea txt_reason;
     private javax.swing.JTextField txt_userName;
     private javax.swing.JLabel username;
     private javax.swing.JLabel userpicChange;
@@ -661,6 +858,11 @@ public class ControlPanel1 extends javax.swing.JFrame {
         changePassword.setVisible(false);
         changeAccPic.setVisible(false);
         deleteOwnAcc.setVisible(false);
+
+        //--------delete button visibility @ textArealayeredPane-----
+
+        jButton3.setVisible(false);
+
         //-------------password strength checking visibility---
         small.setVisible(false);
         medium.setVisible(false);
@@ -707,28 +909,50 @@ public class ControlPanel1 extends javax.swing.JFrame {
         }
     }
 
+    //------------otherAccounts-------------------------------------------------
+    public void getPicture() {
+        try {
+            ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM usertype WHERE user_nic=(SELECT userType_user_nic FROM login)");
+            while (rs.next()) {
+               
+            }
+            username.setText(accUserName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //-----------timer----------------------------------------------------------
+    public void timer() {
+        Timer t;
+        t = new Timer(0, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date d = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
+                time.setText(sdf.format(d));
+            }
+        });
+        t.start();
+    }
+
     //----------------methods--------------------------------------------------
     public void methods() {
         visibility();
         disableTextFields();
         A a = new A();
         a.getPicture("a");
+        timer();
+        getPicture();
+
+        //---------------set initial size of textAreanlayeredPane-------------
+        textArealayeredPane.setSize(600, 0);
 
     }
-    
     //-------------combo box1 @user accounts delete
-    
-    public void thread(){
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-               
-            }
-        });
-    }
-    
     //----------------global variables-----------------------------------------
     String jpath;
     String accUserName;//get the user name currently loged into
+    String deleteStatus;
+    String nic;
 }
