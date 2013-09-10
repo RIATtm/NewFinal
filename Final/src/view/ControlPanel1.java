@@ -36,7 +36,8 @@ public class ControlPanel1 extends javax.swing.JFrame {
         initComponents();
         accUserName = currentUser;
         jLabel7.setText(accUserName);//-----setting userName into UserAccounts homePanel----
-        methods();
+        methods(); //---calling all methods-----
+        
 
     }
 
