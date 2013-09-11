@@ -1489,13 +1489,14 @@ public class ControlPanel1 extends javax.swing.JFrame {
     
         public void getDetails(){
             try {
-                ResultSet rs=DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM login WHERE username='"+accUserName+"'");
-                while(rs.next()){
+                ResultSet rs=DBConnection.setConnection().createStatement().executeQuery("SELECT user_type FROM userType WHERE(SELECT userType_user_nic FROM login WHERE username='"+accUserName+"')");
+                if(rs.next()){
                     String type=rs.getString("user_type");
                     label_post2.setText(type);
                     label_post.setText(type);
                 }
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     
