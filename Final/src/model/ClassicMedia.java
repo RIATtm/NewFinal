@@ -67,7 +67,7 @@ public class ClassicMedia {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                    port = "COM17";
+                    port = "COM19";
                     serialcons = MediaControl.setPort(port);
                     System.out.println("Sending Started....");
                     serialcons.send("AT+CMGF=1");
