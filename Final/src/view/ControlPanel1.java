@@ -116,9 +116,6 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
-        ControlPanel = new javax.swing.JLayeredPane();
-        promotionDemot = new javax.swing.JLayeredPane();
-        combo_type = new javax.swing.JComboBox();
         promote = new javax.swing.JLayeredPane();
         label_newPost = new javax.swing.JLabel();
         positions = new javax.swing.JLayeredPane();
@@ -131,6 +128,9 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton23 = new javax.swing.JButton();
+        ControlPanel = new javax.swing.JLayeredPane();
+        promotionDemot = new javax.swing.JLayeredPane();
+        combo_type = new javax.swing.JComboBox();
         demote = new javax.swing.JLayeredPane();
         positions1 = new javax.swing.JLayeredPane();
         manager1 = new javax.swing.JRadioButton();
@@ -557,25 +557,6 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jLabel3.setBounds(0, 0, 1366, 768);
         changePassword.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
-
-        combo_type.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        combo_type.setForeground(new java.awt.Color(204, 0, 204));
-        combo_type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Promotions", "Demotions" }));
-        combo_type.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                combo_typeMouseEntered(evt);
-            }
-        });
-        combo_type.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combo_typeActionPerformed(evt);
-            }
-        });
-        combo_type.setBounds(650, 140, 310, 40);
-        promotionDemot.add(combo_type, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         label_newPost.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         label_newPost.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -663,8 +644,24 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jButton23.setBounds(440, 300, 230, 80);
         promote.add(jButton23, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        promote.setBounds(280, 240, 820, 410);
-        promotionDemot.add(promote, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+
+        combo_type.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        combo_type.setForeground(new java.awt.Color(204, 0, 204));
+        combo_type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Promotions", "Demotions" }));
+        combo_type.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                combo_typeMouseEntered(evt);
+            }
+        });
+        combo_type.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_typeActionPerformed(evt);
+            }
+        });
+        combo_type.setBounds(650, 140, 310, 40);
+        promotionDemot.add(combo_type, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         positions1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 2, true));
         positions1.setOpaque(true);
@@ -1487,6 +1484,21 @@ public class ControlPanel1 extends javax.swing.JFrame {
             }
         }
     }
+    
+    //-----------------getUser details------------------------------------------
+    
+        public void getDetails(){
+            try {
+                ResultSet rs=DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM login WHERE username='"+accUserName+"'");
+                while(rs.next()){
+                    String type=rs.getString("user_type");
+                    label_post2.setText(type);
+                    label_post.setText(type);
+                }
+            } catch (Exception e) {
+            }
+        }
+    
 
     //----------disable text fields in changing userName-----------------------
     public void disableTextFields() {
@@ -1539,6 +1551,7 @@ public class ControlPanel1 extends javax.swing.JFrame {
         a.getPicture("a");
         timer();
         getOtherAccounts();
+        getDetails();
 
         //---------------set initial size of textAreanlayeredPane-------------
         textArealayeredPane.setSize(600, 0);
