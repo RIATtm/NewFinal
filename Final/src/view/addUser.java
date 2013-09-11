@@ -5,6 +5,7 @@
 package view;
 
 import com.sun.awt.AWTUtilities;
+import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import model.ClassicMedia;
 import model.quaries;
 
 /**
@@ -21,7 +23,7 @@ import model.quaries;
  */
 public class addUser extends javax.swing.JFrame {
 
-    private String username, password, status;
+    String status;
 
     /**
      * Creates new form addUser
@@ -302,9 +304,9 @@ public class addUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
     String m = " ";
     private void sBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sBtnActionPerformed
-        autoGenerate();
         try {
 
+            String[] getData = autoGenerate();
             if (jbm.isSelected()) {
                 m = "m";
             } else if (jbf.isSelected()) {
@@ -312,16 +314,29 @@ public class addUser extends javax.swing.JFrame {
 
             }
             // String[] name = ttname.getText().split(" ");
-            String feild[] = {txtnic.getText(), ttname.getText(), m, txtmobile1.getText(), txthome.getText(), txtaddress.getText(), jpath, status};
-            String login[] = {username, password, txtnic.getText()};
-            quaries.autosave("usertype", feild, login);
-            JOptionPane.showMessageDialog(this, "Succesfull !");
+            try {
 
-            //        String[] ar={"123","123","123","123","123","123","123","123","123","123","123"};
-            //        quaries.autosave("usertype", ar);
+                //----------SMS GENERATE------------------------------------------------
+                ClassicMedia.sendSms(txtmobile1.getText(), getData[0] + " Your Verification Code : " + getData[1]);
+                String feild[] = {txtnic.getText(), ttname.getText(), m, txtmobile1.getText(), txthome.getText(), txtaddress.getText(), jpath, status};
+                String login[] = {getData[0], getData[1], txtnic.getText()};
+                quaries.autosave("usertype", feild, login);
+                JOptionPane.showMessageDialog(this, "Succesfull !");
+
+
+
+                //        String[] ar={"123","123","123","123","123","123","123","123","123","123","123"};
+                //        quaries.autosave("usertype", ar);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error : " + e, "SMS", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_sBtnActionPerformed
 
     private void txtmobile1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobile1KeyPressed
@@ -360,9 +375,9 @@ public class addUser extends javax.swing.JFrame {
 
     private void uBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uBtnActionPerformed
         try {
-            String name[]={"user_name","user_gender","user_mobileNumber","user_homeNumber","user_address"};
-            String column[]={ttname.getText(),m,txtmobile1.getText(),txthome.getText(),txtaddress.getText()};
-            
+            String name[] = {"user_name", "user_gender", "user_mobileNumber", "user_homeNumber", "user_address"};
+            String column[] = {ttname.getText(), m, txtmobile1.getText(), txthome.getText(), txtaddress.getText()};
+
             quaries.update("usertype", name, column, txtnic.getText(), "user_nic");
         } catch (Exception e) {
             e.printStackTrace();
@@ -424,7 +439,8 @@ public class addUser extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     String jpath;
 
-    public void autoGenerate() {
+    private String[] autoGenerate() {
+        String username, password;
         String name, number1, number2;
         String ar[];
         number1 = txtnic.getText().substring(0, 2);
@@ -438,6 +454,8 @@ public class addUser extends javax.swing.JFrame {
         }
 
         password = new Random().nextInt(800000) + 100000 + "";
+        String[] userPass = {username, password};
+        return userPass;
     }
 //    public void pic()throws Exception{
 //        FileInputStream file=new FileInputStream(new File(jpath));
