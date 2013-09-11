@@ -8,6 +8,8 @@ import com.sun.awt.AWTUtilities;
 import java.awt.Point;
 import java.sql.ResultSet;
 import java.util.Vector;
+import javax.swing.JComponent;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Queries;
 import model.quaries;
@@ -35,34 +37,61 @@ public class userssearch extends javax.swing.JFrame {
     private void initComponents() {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        m = new javax.swing.JScrollPane();
+        manger = new javax.swing.JTable();
+        s = new javax.swing.JScrollPane();
+        supplier = new javax.swing.JTable();
+        l = new javax.swing.JScrollPane();
+        labours = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         txtnic = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        manger.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nic", "Id", "Name", "Gender", "Registere Date", "Position"
+                "Nic", "Name", "Gender", "Mobile num", "Home num", "Adress", "position"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        m.setViewportView(manger);
 
-        jScrollPane1.setBounds(250, 260, 910, 270);
-        jLayeredPane1.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        m.setBounds(250, 260, 910, 270);
+        jLayeredPane1.add(m, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        supplier.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nic", "Name", "Gender", "Mobile num", "Company", "Companu Num", "Company Adress"
+            }
+        ));
+        s.setViewportView(supplier);
+
+        s.setBounds(250, 260, 910, 270);
+        jLayeredPane1.add(s, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        labours.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Nic", "Name", "Gender", "Mobile num", "Home num", "Adress", "position"
+            }
+        ));
+        l.setViewportView(labours);
+
+        l.setBounds(250, 260, 910, 270);
+        jLayeredPane1.add(l, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton1.setText("Managers");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -73,31 +102,13 @@ public class userssearch extends javax.swing.JFrame {
         jButton1.setBounds(170, 580, 110, 23);
         jLayeredPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jButton2.setText("Promote/demote");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jButton2.setBounds(810, 600, 130, 23);
-        jLayeredPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton3.setText("Remove");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jButton3.setBounds(950, 600, 130, 23);
-        jLayeredPane1.add(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton4.setText("Promote/demote");
+        jButton4.setText("Update user Details");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jButton4.setBounds(810, 600, 130, 23);
+        jButton4.setBounds(790, 600, 130, 23);
         jLayeredPane1.add(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txtnic.setBackground(new java.awt.Color(247, 247, 247));
@@ -115,12 +126,8 @@ public class userssearch extends javax.swing.JFrame {
                 txtnicKeyReleased(evt);
             }
         });
-        txtnic.setBounds(360, 130, 220, 30);
+        txtnic.setBounds(400, 130, 200, 30);
         jLayeredPane1.add(txtnic, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setBounds(370, 130, 200, 30);
-        jLayeredPane1.add(jComboBox1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton5.setText("Suppliers");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -137,21 +144,12 @@ public class userssearch extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        jButton6.setBounds(170, 640, 110, 23);
+        jButton6.setBounds(170, 610, 110, 23);
         jLayeredPane1.add(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton7.setText("Labours");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        jButton7.setBounds(170, 610, 110, 23);
-        jLayeredPane1.add(jButton7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setBounds(630, 120, 120, 130);
+        jDesktopPane1.setBounds(1010, 90, 120, 130);
         jLayeredPane1.add(jDesktopPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search1.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search1 (2).png"))); // NOI18N
         jLabel1.setBounds(0, 0, 1370, 770);
         jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -174,44 +172,41 @@ public class userssearch extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//         try {
-//            DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
-//            String idnic = txtnic.getText();
-//            ResultSet rs = quaries.searchusers("test", "idtest", txtnic.getText());
-//            Vector v = new Vector();
-//            while (rs.next()) {
-//                v.add(rs.getString(1));
-//                v.add(rs.getString(2));
-//                v.add(rs.getString(3));
-//                v.add(rs.getString(4));
-//                v.add(rs.getString(5));
-//                v.add(rs.getString(6));
-//            
-//                
-//                dt.addRow(v);
-//            }
-//           String s=dt.getValueAt(jTable1.getSelectedRow(), 0).toString();
-//            System.out.println(s);
-//            ResultSet pic=quaries.searchusers("user", "id", s);
-//            if(pic.next()){
-//                pic.getString("pic");
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        JComponent[] jcomp = {s, l};
+        visibility(jcomp, false);
+        m.setVisible(true);
+        DefaultTableModel dt = (DefaultTableModel) manger.getModel();
+        dt.setRowCount(0);
+
+        try {
+            manger.setVisible(true);
+            String idnic = txtnic.getText();
+            ResultSet rs = quaries.searchusers("usertype");
+
+            while (rs.next()) {
+                Vector v = new Vector();
+                v.add(rs.getString(1));
+                v.add(rs.getString(2));
+                v.add(rs.getString(3));
+                v.add(rs.getString(4));
+                v.add(rs.getString(5));
+                v.add(rs.getString(6));
+                v.add(rs.getString(8));
+
+
+                dt.addRow(v);
+            }
+            String s = dt.getValueAt(manger.getSelectedRow(), 0).toString();
+            System.out.println(s);
+            ResultSet pic = quaries.searchpic("user", s);
+            if (pic.next()) {
+                pic.getString("pic");
+                System.out.println(pic);
+            }
+
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void txtnicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnicActionPerformed
         // TODO add your handling code here:
@@ -229,47 +224,149 @@ public class userssearch extends javax.swing.JFrame {
 
     private void txtnicKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnicKeyPressed
         try {
-            quaries.searchusers("users", null, null);
+//            quaries.searchusers("users", null, null);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_txtnicKeyPressed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-//        try {
-//            DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
-//            String idnic = txtnic.getText();
-//            ResultSet rs = quaries.searchusers("test", "idtest", txtnic.getText());
-//            Vector v = new Vector();
-//            while (rs.next()) {
-//                v.add(rs.getString(1));
-//                v.add(rs.getString(2));
-//                v.add(rs.getString(3));
-//                v.add(rs.getString(4));
-//                v.add(rs.getString(5));
-//                v.add(rs.getString(6));
-//            
-//                
-//                dt.addRow(v);
-//            }
+        JComponent[] jcomp = {m, l};
+        visibility(jcomp, false);
+        s.setVisible(true);
+
+        DefaultTableModel dt = (DefaultTableModel) supplier.getModel();
+        dt.setRowCount(0);
+
+        try {
+            supplier.setVisible(true);
+            String idnic = txtnic.getText();
+            ResultSet rs = quaries.searchusers("supplier");
+
+            while (rs.next()) {
+                Vector v = new Vector();
+                v.add(rs.getString(1));
+                v.add(rs.getString(2));
+                v.add(rs.getString(3));
+                v.add(rs.getString(4));
+                v.add(rs.getString(5));
+                v.add(rs.getString(6));
+                v.add(rs.getString(7));
+              
+                
+
+
+                dt.addRow(v);
+            }
 //           String s=dt.getValueAt(jTable1.getSelectedRow(), 0).toString();
 //            System.out.println(s);
-//            ResultSet pic=quaries.searchusers("user", "id", s);
+//            ResultSet pic=quaries.searchpic("user", "sup_nic");
 //            if(pic.next()){
 //                pic.getString("pic");
 //            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        JComponent[] jcomp = {m, s};
+        visibility(jcomp, false);
+        l.setVisible(true);
+        DefaultTableModel dt = (DefaultTableModel) labours.getModel();
+
+        dt.setRowCount(0);
+        try {
+            labours.setVisible(true);
+            String idnic = txtnic.getText();
+            ResultSet rs = quaries.searchusers("labourer");
+
+            while (rs.next()) {
+                Vector v = new Vector();
+                v.add(rs.getString(1));
+                v.add(rs.getString(2));
+                v.add(rs.getString(3));
+                v.add(rs.getString(4));
+                v.add(rs.getString(5));
+                v.add(rs.getString(6));
+                 v.add(rs.getString(7));
+                  v.add(rs.getString(8));
+               
+
+
+                dt.addRow(v);
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+        DefaultTableModel dt1 = (DefaultTableModel) labours.getModel();
+        DefaultTableModel dt2 = (DefaultTableModel) manger.getModel();
+        DefaultTableModel dt3 = (DefaultTableModel) supplier.getModel();
+
+        if (l.isVisible()) {
+           waiterAdd add = new waiterAdd("Update");
+                AWTUtilities.setWindowOpaque(add, false);
+                add.setVisible(true);
+//            
+            add.txtnic.setText((dt1.getValueAt(labours.getSelectedRow(), 1)).toString());
+            add.ttname.setText((dt1.getValueAt(labours.getSelectedRow(), 2)).toString());
+            if((dt1.getValueAt(labours.getSelectedRow(), 3)).toString()=="m"){
+                add.jbm.setSelected(true);
+            }else{
+                add.jbf.setSelected(true);
+            }
+            add.txtmobile.setText((dt1.getValueAt(labours.getSelectedRow(), 4)).toString());
+            add.txthome.setText((dt1.getValueAt(labours.getSelectedRow(), 5)).toString());
+            add.txtaddress.setText((dt1.getValueAt(labours.getSelectedRow(), 6)).toString());
+//            
+            add.setVisible(true);
+        }
+       if (m.isVisible()) {
+             addUser add = new addUser("Update");
+                AWTUtilities.setWindowOpaque(add, false);
+                add.setVisible(true);
+               
+            add.txtnic.setText((dt2.getValueAt(manger.getSelectedRow(), 0)).toString());
+            add.ttname.setText((dt2.getValueAt(manger.getSelectedRow(), 1)).toString());
+            if((dt2.getValueAt(manger.getSelectedRow(), 2)).toString()=="m"){
+                add.jbm.setSelected(true);
+            }else{
+                add.jbf.setSelected(true);
+            }
+            add.txtmobile1.setText((dt2.getValueAt(manger.getSelectedRow(), 3)).toString());
+            add.txthome.setText((dt2.getValueAt(manger.getSelectedRow(), 4)).toString());
+            add.txtaddress.setText((dt2.getValueAt(manger.getSelectedRow(), 5)).toString());
+      
+//            
+            add.setVisible(true);
+        }
+       if (s.isVisible()) {
+             supplierAdd add = new supplierAdd("Update");
+                AWTUtilities.setWindowOpaque(add, false);
+                add.setVisible(true);
+//            
+            add.txtnic.setText((dt3.getValueAt(supplier.getSelectedRow(), 0)).toString());
+            add.ttname.setText((dt3.getValueAt(supplier.getSelectedRow(), 1)).toString());
+            if((dt3.getValueAt(supplier.getSelectedRow(), 2)).toString()=="m"){
+                add.jbm.setSelected(true);
+            }else{
+                add.jbf.setSelected(true);
+            }
+            add.txtmobile.setText((dt3.getValueAt(supplier.getSelectedRow(), 3)).toString());
+            add.txtcomname.setText((dt3.getValueAt(supplier.getSelectedRow(), 4)).toString());
+            add.txtcomcon.setText((dt3.getValueAt(supplier.getSelectedRow(), 5)).toString());
+            add.txtcomadd.setText((dt3.getValueAt(supplier.getSelectedRow(), 6)).toString());
+//            
+            add.setVisible(true);
+        }
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,18 +406,24 @@ public class userssearch extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane l;
+    private javax.swing.JTable labours;
+    private javax.swing.JScrollPane m;
+    private javax.swing.JTable manger;
+    private javax.swing.JScrollPane s;
+    private javax.swing.JTable supplier;
     private javax.swing.JTextField txtnic;
     // End of variables declaration//GEN-END:variables
+
+    public void visibility(JComponent[] c, boolean b) {
+        for (JComponent set : c) {
+            set.setVisible(b);
+        }
+    }
 }

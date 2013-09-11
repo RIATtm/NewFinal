@@ -21,14 +21,23 @@ import model.quaries;
  */
 public class addUser extends javax.swing.JFrame {
 
-    String username, password, status;
+    private String username, password, status;
 
     /**
      * Creates new form addUser
      */
-    public addUser() {
+    public addUser(String getPath) {
         status = JOptionPane.showInputDialog("Enter Status :");
         initComponents();
+//        path = getPath;
+        if (getPath == "Save") {
+            sBtn.setVisible(true);
+            uBtn.setVisible(false);
+        }
+        if (getPath == "Update") {
+            uBtn.setVisible(true);
+            sBtn.setVisible(false);
+        }
     }
 
     /**
@@ -41,6 +50,7 @@ public class addUser extends javax.swing.JFrame {
     private void initComponents() {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
+        uBtn = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         txtnic = new javax.swing.JTextField();
         ttname = new javax.swing.JTextField();
@@ -51,12 +61,21 @@ public class addUser extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         image = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        sBtn = new javax.swing.JButton();
         txtmobile1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+
+        uBtn.setText("update");
+        uBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uBtnActionPerformed(evt);
+            }
+        });
+        uBtn.setBounds(560, 590, 100, 40);
+        jLayeredPane1.add(uBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton3.setText("test");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +152,7 @@ public class addUser extends javax.swing.JFrame {
         txtaddress.setBounds(320, 450, 360, 30);
         jLayeredPane1.add(txtaddress, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        image.setBounds(20, 0, 250, 260);
+        image.setBounds(0, 0, 270, 260);
         jDesktopPane1.add(image, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jDesktopPane1.setBounds(820, 200, 270, 260);
@@ -148,14 +167,14 @@ public class addUser extends javax.swing.JFrame {
         jButton2.setBounds(880, 500, 130, 30);
         jLayeredPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        sBtn.setText("Save");
+        sBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                sBtnActionPerformed(evt);
             }
         });
-        jButton1.setBounds(690, 590, 110, 40);
-        jLayeredPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        sBtn.setBounds(690, 590, 110, 40);
+        jLayeredPane1.add(sBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txtmobile1.setBackground(new java.awt.Color(247, 247, 247));
         txtmobile1.setText("+94");
@@ -282,7 +301,7 @@ public class addUser extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
     String m = " ";
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void sBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sBtnActionPerformed
         autoGenerate();
         try {
 
@@ -296,14 +315,14 @@ public class addUser extends javax.swing.JFrame {
             String feild[] = {txtnic.getText(), ttname.getText(), m, txtmobile1.getText(), txthome.getText(), txtaddress.getText(), jpath, status};
             String login[] = {username, password, txtnic.getText()};
             quaries.autosave("usertype", feild, login);
-
+            JOptionPane.showMessageDialog(this, "Succesfull !");
 
             //        String[] ar={"123","123","123","123","123","123","123","123","123","123","123"};
             //        quaries.autosave("usertype", ar);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_sBtnActionPerformed
 
     private void txtmobile1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobile1KeyPressed
         // TODO add your handling code here:
@@ -339,6 +358,17 @@ public class addUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txthomeActionPerformed
 
+    private void uBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uBtnActionPerformed
+        try {
+            String name[]={"user_name","user_gender","user_mobileNumber","user_homeNumber","user_address"};
+            String column[]={ttname.getText(),m,txtmobile1.getText(),txthome.getText(),txtaddress.getText()};
+            
+            quaries.update("usertype", name, column, txtnic.getText(), "user_nic");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_uBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -369,7 +399,7 @@ public class addUser extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                addUser add = new addUser();
+                addUser add = new addUser("Save");
                 AWTUtilities.setWindowOpaque(add, false);
                 add.setVisible(true);
             }
@@ -377,19 +407,20 @@ public class addUser extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel image;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
-    public static javax.swing.JRadioButton jbf;
-    public static javax.swing.JRadioButton jbm;
-    public static javax.swing.JTextField ttname;
-    public static javax.swing.JTextField txtaddress;
-    public static javax.swing.JTextField txthome;
-    public static javax.swing.JTextField txtmobile1;
-    private javax.swing.JTextField txtnic;
+    public javax.swing.JRadioButton jbf;
+    public javax.swing.JRadioButton jbm;
+    private javax.swing.JButton sBtn;
+    public javax.swing.JTextField ttname;
+    public javax.swing.JTextField txtaddress;
+    public javax.swing.JTextField txthome;
+    public javax.swing.JTextField txtmobile1;
+    public javax.swing.JTextField txtnic;
+    private javax.swing.JButton uBtn;
     // End of variables declaration//GEN-END:variables
     String jpath;
 

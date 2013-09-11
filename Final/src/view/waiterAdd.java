@@ -4,6 +4,14 @@
  */
 package view;
 
+import com.sun.awt.AWTUtilities;
+import control.DBConnection;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import model.Queries;
 import model.quaries;
 
 /**
@@ -12,11 +20,23 @@ import model.quaries;
  */
 public class waiterAdd extends javax.swing.JFrame {
 
+    String status;
+    String waiterId;
+
     /**
      * Creates new form waiterAdd
      */
-    public waiterAdd() {
+    public waiterAdd(String getPath) {
+        status = JOptionPane.showInputDialog(null, "Enter Status :");
         initComponents();
+             if (getPath == "Save") {
+            sbtn.setVisible(true);
+            ubtn.setVisible(false);
+        }
+        if (getPath == "Update") {
+            ubtn.setVisible(true);
+            sbtn.setVisible(false);
+        }
     }
 
     /**
@@ -35,11 +55,13 @@ public class waiterAdd extends javax.swing.JFrame {
         jbm = new javax.swing.JRadioButton();
         txtmobile = new javax.swing.JTextField();
         txtaddress = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        sbtn = new javax.swing.JButton();
         txthome = new javax.swing.JTextField();
+        ubtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         txtnic.setBackground(new java.awt.Color(247, 247, 247));
         txtnic.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -49,11 +71,11 @@ public class waiterAdd extends javax.swing.JFrame {
             }
         });
         txtnic.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtnicKeyTyped(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtnicKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnicKeyTyped(evt);
             }
         });
         txtnic.setBounds(360, 170, 330, 30);
@@ -90,11 +112,11 @@ public class waiterAdd extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtmobileKeyPressed(evt);
             }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtmobileKeyTyped(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtmobileKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtmobileKeyTyped(evt);
             }
         });
         txtmobile.setBounds(360, 350, 340, 30);
@@ -105,14 +127,14 @@ public class waiterAdd extends javax.swing.JFrame {
         txtaddress.setBounds(360, 430, 340, 30);
         jLayeredPane1.add(txtaddress, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jButton2.setText("Save");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        sbtn.setText("Save");
+        sbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                sbtnActionPerformed(evt);
             }
         });
-        jButton2.setBounds(780, 570, 57, 23);
-        jLayeredPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        sbtn.setBounds(780, 570, 57, 23);
+        jLayeredPane1.add(sbtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txthome.setBackground(new java.awt.Color(247, 247, 247));
         txthome.setText("+94");
@@ -130,6 +152,15 @@ public class waiterAdd extends javax.swing.JFrame {
         });
         txthome.setBounds(360, 390, 170, 30);
         jLayeredPane1.add(txthome, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        ubtn.setText("Update");
+        ubtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ubtnActionPerformed(evt);
+            }
+        });
+        ubtn.setBounds(850, 570, 67, 23);
+        jLayeredPane1.add(ubtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/waiteradd..png"))); // NOI18N
         jLabel1.setBounds(10, 0, 1366, 768);
@@ -162,6 +193,9 @@ public class waiterAdd extends javax.swing.JFrame {
         if (!Character.isDigit(c)) {
             evt.consume();
         }
+        if(txtnic.getText().length()>10){
+            evt.consume();
+        }
     }//GEN-LAST:event_txtnicKeyTyped
 
     private void txtnicKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnicKeyReleased
@@ -172,8 +206,8 @@ public class waiterAdd extends javax.swing.JFrame {
             }
             if (Integer.parseInt(txtnic.getText().substring(2, 5)) > 500) {
                 //                if (Integer.parseInt(txtnic.getText().substring(0, 2)) + 1900 > new DateTime().getYear() - 23) {
-                    jbf.setSelected(true);
-                    //                }
+                jbf.setSelected(true);
+                //                }
 
             } else {
                 jbm.setSelected(true);
@@ -216,7 +250,6 @@ public class waiterAdd extends javax.swing.JFrame {
         }
 
         if (txtmobile.getCaretPosition() == 3) {
-            System.out.println("4");
             if (evt.getKeyChar() == '0') {
                 evt.consume();
             }
@@ -224,10 +257,12 @@ public class waiterAdd extends javax.swing.JFrame {
     }//GEN-LAST:event_txtmobileKeyTyped
 
     private void txtmobileKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyReleased
-
     }//GEN-LAST:event_txtmobileKeyReleased
-String m ="";
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    String m = "";
+    private void sbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sbtnActionPerformed
+
+        setId();
+        System.out.println(waiterId);
         try {
 
             if (jbm.isSelected()) {
@@ -237,7 +272,7 @@ String m ="";
 
             }
             String[] name = ttname.getText().split(" ");
-            String feild[] = {txtnic.getText(), ttname.getText(), m, txtmobile.getText(), txthome.getText(), txtaddress.getText(), "dsds"};
+            final String feild[] = {waiterId, txtnic.getText(), ttname.getText(), m, txtmobile.getText(), txthome.getText(), txtaddress.getText(), status};
             quaries.waitersave("labourer", feild);
 
             //        String[] ar={"123"z,"123","123","123","123","123","123","123","123","123","123"};
@@ -245,7 +280,8 @@ String m ="";
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+        clear();
+    }//GEN-LAST:event_sbtnActionPerformed
 
     private void txthomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txthomeKeyPressed
         // TODO add your handling code here:
@@ -256,7 +292,6 @@ String m ="";
     }//GEN-LAST:event_txthomeKeyPressed
 
     private void txthomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txthomeKeyReleased
-
     }//GEN-LAST:event_txthomeKeyReleased
 
     private void txthomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txthomeKeyTyped
@@ -275,6 +310,17 @@ String m ="";
             }
         }
     }//GEN-LAST:event_txthomeKeyTyped
+
+    private void ubtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ubtnActionPerformed
+         try {
+            String name[]={"lab_name","lab_gender","lab_mobileNumber","lab_homeNumber","lab_address"};
+            String column[]={ttname.getText(),m,txtmobile.getText(),txthome.getText(),txtaddress.getText()};
+            
+            quaries.update("labourer", name, column, txtnic.getText(), "lab_nic");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_ubtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,20 +352,45 @@ String m ="";
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new waiterAdd().setVisible(true);
+                waiterAdd s = new waiterAdd("Save");
+                AWTUtilities.setWindowOpaque(s, false);
+                s.setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
-    public static javax.swing.JRadioButton jbf;
-    public static javax.swing.JRadioButton jbm;
-    public static javax.swing.JTextField ttname;
-    public static javax.swing.JTextField txtaddress;
-    public static javax.swing.JTextField txthome;
-    public static javax.swing.JTextField txtmobile;
-    private javax.swing.JTextField txtnic;
+    public javax.swing.JRadioButton jbf;
+    public javax.swing.JRadioButton jbm;
+    private javax.swing.JButton sbtn;
+    public javax.swing.JTextField ttname;
+    public javax.swing.JTextField txtaddress;
+    public javax.swing.JTextField txthome;
+    public javax.swing.JTextField txtmobile;
+    public javax.swing.JTextField txtnic;
+    private javax.swing.JButton ubtn;
     // End of variables declaration//GEN-END:variables
+
+    public void setId() {
+        try {
+            ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM labourer ORDER BY CAST(lab_id AS SIGNED INTEGER) ASC");
+            if (rs.next()) {
+                rs.last();
+                waiterId = Integer.parseInt(rs.getString(1)) + 1 + "";
+            } else {
+                waiterId = 1 + "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void clear() {
+         JTextField[] tf={txtnic, ttname, txtmobile, txthome, txtaddress};
+                 for(int val=0;val<tf.length;val++){
+                     tf[val].setText(null);
+                 }
+    }
 }

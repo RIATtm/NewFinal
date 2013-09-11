@@ -16,8 +16,16 @@ public class supplierAdd extends javax.swing.JFrame {
     /**
      * Creates new form supplierAdd
      */
-    public supplierAdd() {
+    public supplierAdd(String getPath) {
         initComponents();
+         if (getPath == "Save") {
+            sBtn.setVisible(true);
+            uBtn.setVisible(false);
+        }
+        if (getPath == "Update") {
+            uBtn.setVisible(true);
+            sBtn.setVisible(false);
+        }
     }
 
     /**
@@ -35,12 +43,11 @@ public class supplierAdd extends javax.swing.JFrame {
         jbm = new javax.swing.JRadioButton();
         jbf = new javax.swing.JRadioButton();
         txtmobile = new javax.swing.JTextField();
-        txthome = new javax.swing.JTextField();
-        txtaddress = new javax.swing.JTextField();
         txtcomname = new javax.swing.JTextField();
         txtcomadd = new javax.swing.JTextField();
         txtcomcon = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        sBtn = new javax.swing.JButton();
+        uBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -54,11 +61,11 @@ public class supplierAdd extends javax.swing.JFrame {
             }
         });
         txtnic.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtnicKeyTyped(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtnicKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnicKeyTyped(evt);
             }
         });
         txtnic.setBounds(350, 170, 350, 30);
@@ -102,18 +109,8 @@ public class supplierAdd extends javax.swing.JFrame {
                 txtmobileKeyReleased(evt);
             }
         });
-        txtmobile.setBounds(370, 350, 330, 30);
+        txtmobile.setBounds(360, 380, 330, 30);
         jLayeredPane1.add(txtmobile, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        txthome.setBackground(new java.awt.Color(247, 247, 247));
-        txthome.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txthome.setBounds(370, 390, 330, 30);
-        jLayeredPane1.add(txthome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        txtaddress.setBackground(new java.awt.Color(247, 247, 247));
-        txtaddress.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txtaddress.setBounds(370, 430, 330, 30);
-        jLayeredPane1.add(txtaddress, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txtcomname.setBackground(new java.awt.Color(247, 247, 247));
         txtcomname.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -130,14 +127,23 @@ public class supplierAdd extends javax.swing.JFrame {
         txtcomcon.setBounds(360, 520, 300, 30);
         jLayeredPane1.add(txtcomcon, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jButton2.setText("Save");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        sBtn.setText("Save");
+        sBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                sBtnActionPerformed(evt);
             }
         });
-        jButton2.setBounds(800, 650, 57, 23);
-        jLayeredPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        sBtn.setBounds(800, 650, 57, 23);
+        jLayeredPane1.add(sBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        uBtn.setText("Update");
+        uBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uBtnActionPerformed(evt);
+            }
+        });
+        uBtn.setBounds(870, 650, 67, 23);
+        jLayeredPane1.add(uBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/supplier-Recovered.png"))); // NOI18N
         jLabel1.setBounds(0, 0, 1366, 768);
@@ -235,18 +241,18 @@ public class supplierAdd extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtmobileKeyReleased
 String m=" ";
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void sBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sBtnActionPerformed
 
         try {
 
             if (jbm.isSelected()) {
-                m = jbm.getText();
+                m = "M";
             } else if (jbf.isSelected()) {
-                m = jbf.getText();
+                m = "F";
 
             }
             String name = ttname.getText();
-            String feild[] = {txtnic.getText(), name , m, txtmobile.getText(), txthome.getText(), txtaddress.getText(), txtcomname.getText(), txtcomadd.getText(), txtcomcon.getText()};
+            String feild[] = {txtnic.getText(), name , m, txtmobile.getText(), txtcomname.getText(), txtcomadd.getText(), txtcomcon.getText()};
             quaries.supsave("supplier", feild);
 
             //        String[] ar={"123"z,"123","123","123","123","123","123","123","123","123","123"};
@@ -254,7 +260,18 @@ String m=" ";
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_sBtnActionPerformed
+
+    private void uBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uBtnActionPerformed
+ try {
+            String name[]={"sup_name","sup_gender","sup_mobileNumber","sup_comName","sup_comno","sup_comAddress"};
+            String column[]={ttname.getText(),m,txtmobile.getText(),txtcomname.getText(),txtcomcon.getText(),txtcomadd.getText()};
+            
+            quaries.supupdate("supplier", name, column, txtnic.getText(), "sup_nic");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }       
+    }//GEN-LAST:event_uBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,25 +303,24 @@ String m=" ";
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                supplierAdd s = new supplierAdd();
+                supplierAdd s = new supplierAdd("Save");
                 AWTUtilities.setWindowOpaque(s, false);
                 s.setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     public static javax.swing.JRadioButton jbf;
     public static javax.swing.JRadioButton jbm;
+    private javax.swing.JButton sBtn;
     public static javax.swing.JTextField ttname;
-    public static javax.swing.JTextField txtaddress;
     public static javax.swing.JTextField txtcomadd;
     public static javax.swing.JTextField txtcomcon;
     public static javax.swing.JTextField txtcomname;
-    public static javax.swing.JTextField txthome;
     public static javax.swing.JTextField txtmobile;
-    private javax.swing.JTextField txtnic;
+    public javax.swing.JTextField txtnic;
+    private javax.swing.JButton uBtn;
     // End of variables declaration//GEN-END:variables
 }
