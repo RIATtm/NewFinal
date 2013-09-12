@@ -4,7 +4,11 @@
  */
 package view;
 
-import com.sun.awt.AWTUtilities;
+import control.DBConnection;
+import java.sql.ResultSet;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +22,26 @@ public class stock extends javax.swing.JFrame {
     public stock() {
         initComponents();
     }
+     public void combo() {
+        try {
+            ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM products where pro_id like'"+txtiteem.getText()+"'% ");
+            Vector v = new Vector();
+            combitem.setModel(new DefaultComboBoxModel(v));
+
+            while (rs.next()) {
+                String pn = rs.getString("pro_id") + " " + rs.getString("pro_name");
+                v.add(rs.getString(pn));
+
+
+
+
+
+            }
+            txtiteem.setText(combitem.getSelectedItem().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,8 +53,48 @@ public class stock extends javax.swing.JFrame {
     private void initComponents() {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
+        txtiteem = new javax.swing.JTextField();
+        combitem = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtiteem.setBorder(null);
+        txtiteem.setBounds(380, 130, 200, 30);
+        jLayeredPane1.add(txtiteem, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        combitem.setEditable(true);
+        combitem.setBounds(380, 130, 200, 30);
+        jLayeredPane1.add(combitem, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Product id", "Quantity", "Total", "Date modified"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jScrollPane1.setBounds(190, 220, 950, 280);
+        jLayeredPane1.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton1.setText("Search up");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.setBounds(640, 530, 110, 30);
+        jLayeredPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/search1.png"))); // NOI18N
+        jLabel1.setBounds(-30, 0, 1400, 770);
+        jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -43,12 +107,33 @@ public class stock extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            DefaultTableModel dt=(DefaultTableModel) jTable1.getModel();
+            Vector v=new Vector();
+            ResultSet rs=DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM stocks");
+            while(rs.next()){
+              v.add(rs.getString("product_pro_id"));
+              v.add(rs.getString("pro_quantity"));
+              double tot=0;
+              for(int i=0;i<dt.getRowCount();i++){
+                  double d=Double.parseDouble(dt.getValueAt(i, 2).toString());
+                  tot +=d;
+                  v.add(tot);
+              }
+              v.add(rs.getString("date"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,13 +165,17 @@ public class stock extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                stock s = new stock();
-                AWTUtilities.setWindowOpaque(s, false);
-                s.setVisible(true);
+                new stock().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox combitem;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txtiteem;
     // End of variables declaration//GEN-END:variables
 }

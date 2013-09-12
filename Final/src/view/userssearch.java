@@ -62,6 +62,9 @@ public class userssearch extends javax.swing.JFrame {
                 "Nic", "Name", "Gender", "Mobile num", "Home num", "Adress", "position"
             }
         ));
+        manger.setOpaque(false);
+        manger.setShowHorizontalLines(false);
+        manger.setShowVerticalLines(false);
         m.setViewportView(manger);
 
         m.setBounds(250, 260, 910, 270);
