@@ -26,12 +26,37 @@ public class invoice_quaries {
     }
 
     public static ResultSet invoiceWaiter(String field2) throws Exception {
-        ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM waiter WHERE waiter_id LIKE '" + field2 + "%'");
+        ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM labourer WHERE lab_id LIKE '" + field2 + "%'");
         return rs;
     }
 
     public static void invoiceaddDb(String field3[]) throws Exception {
-        DBConnection.setConnection().createStatement().executeUpdate("INSERT INTO bill VALUES ('" + field3[0] + "','" + field3[1] + "','" + field3[2] + "','" + field3[2] + "')");
-        JOptionPane.showMessageDialog(null, "done");
+        DBConnection.setConnection().createStatement().executeUpdate("INSERT INTO invoice_bill VALUES ('" + field3[0] + "','" + field3[1] + "','" + field3[2] + "','" + field3[3] + "')");
+    }
+
+    public static void invoiceTreat(String treat[]) throws Exception {
+        DBConnection.setConnection().createStatement().executeUpdate("INSERT INTO treat_bill VALUES('" + treat[0] + "','" + treat[1] + "','" + treat[2] + "','" + treat[3] + "')");
+    }
+
+    public static ResultSet invoiceSearchLabour(String field2) throws Exception {
+        ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM labourer WHERE lab_nic LIKE '" + field2 + "%'");
+        return rs;
+    }
+
+    public static ResultSet invoiceSearchUser(String field2) throws Exception {
+        ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM usertype WHERE user_nic LIKE '" + field2 + "%'");
+        return rs;
+    }
+
+    public static void invoiceAddUser(String field3[]) throws Exception {
+        DBConnection.setConnection().createStatement().executeUpdate("INSERT INTO invoice VALUES ('" + field3[0] + "','" + field3[1] + "','" + field3[2] + "','" + field3[3] + "','" + field3[4] + "','" + field3[5] + "')");
+    }
+
+    public static void invoiceTakeAdd(String field3[]) throws Exception {
+        DBConnection.setConnection().createStatement().executeUpdate("INSERT INTO invoice_takeaway VALUES ('" + field3[0] + "','" + field3[1] + "','" + field3[2] + "','" + field3[3] + "')");
+    }
+
+    public static void invoiceTreatAdd(String field3[]) throws Exception {
+        DBConnection.setConnection().createStatement().executeUpdate("INSERT INTO invoice_treat VALUES ('" + field3[0] + "','" + field3[1] + "','" + field3[2] + "','" + field3[3] + "','" + field3[4] + "')");
     }
 }

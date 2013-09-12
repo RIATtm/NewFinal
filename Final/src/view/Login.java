@@ -1,3 +1,7 @@
+
+
+
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -118,80 +122,29 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed
-        try {
-            ResultSet rs = DBConnection.setConnection().createStatement().executeQuery("SELECT * FROM userHistory WHERE userType_user_nic=(SELECT userType_user_nic FROM login WHERE username='" + txt_userName.getText() + "')");
-            if (rs.next()) {
-                loginStatus = rs.getString("delStatus");
-
-                //------------------------------------------------
-                if (loginStatus.equals("Temporaly")) {
-                    int lReply = JOptionPane.showConfirmDialog(this, "Your account has been deleted temporaly \n do you want to restore the account again?", "Message", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-                    if (lReply == JOptionPane.YES_OPTION) {
-                        try {
-                            ResultSet rss = DBConnection.setConnection().createStatement().executeQuery("SELECT *FROM Login WHERE username='" + txt_userName.getText() + "' AND password='" + new String(txt_password.getPassword()) + "'");
-                            if (rss.next()) {
-                                ControlPanel1 cp = new ControlPanel1(user);
-                                AWTUtilities.setWindowOpaque(cp, false);
-                                this.dispose();
-                                cp.setVisible(true);
-                            } else {
-                                i++;
-                                JOptionPane.showMessageDialog(this, "Username and Password did not match", "Warning", JOptionPane.WARNING_MESSAGE);
-                                if (i == 3) {
-                                    int reply = JOptionPane.showConfirmDialog(this, "<html>You have reached the maximum number if errors<br>Do you wish to try again??</html>", "Confirmation message", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
-                                    if (reply == JOptionPane.YES_OPTION) {
-                                        txt_userName.setText(null);
-                                        txt_password.setText(null);
-                                        i = 0;
-                                    } else if (reply == JOptionPane.NO_OPTION) {
-                                        this.dispose();
-                                    }
-                                }
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else if (lReply == JOptionPane.NO_OPTION) {
-                        this.dispose();
-                    }
-                } else if (loginStatus.equals("Permenantly")) {
-                    JOptionPane.showMessageDialog(this, "Sorry you don't have permissions to login to the system", "Message", JOptionPane.ERROR_MESSAGE);
-                    this.dispose();
-                }
-            } else {
-                try {
-                    ResultSet rrs = DBConnection.setConnection().createStatement().executeQuery("SELECT *FROM Login WHERE username='" + txt_userName.getText() + "' AND password='" + new String(txt_password.getPassword()) + "'");
-                    if (rrs.next()) {
-                        ControlPanel1 cp = new ControlPanel1(user);
-                        AWTUtilities.setWindowOpaque(cp, false);
-                        this.dispose();
-                        cp.setVisible(true);
-                    } else {
-                        i++;
-                        JOptionPane.showMessageDialog(this, "Username and Password did not match", "Warning", JOptionPane.WARNING_MESSAGE);
-                        if (i == 3) {
-                            int reply = JOptionPane.showConfirmDialog(this, "<html>You have reached the maximum number if errors<br>Do you wish to try again??</html>", "Confirmation message", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
-                            if (reply == JOptionPane.YES_OPTION) {
-                                txt_userName.setText(null);
-                                txt_password.setText(null);
-                                i = 0;
-                            } else if (reply == JOptionPane.NO_OPTION) {
-                                this.dispose();
-                            }
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
-
+//        try {
+//            ResultSet rs = db.con().createStatement().executeQuery("SELECT *FROM Login WHERE username='" + txt_userName.getText() + "' AND password='" + new String(txt_password.getPassword()) + "'");
+//            if (rs.next()) {
+//                //login statement
+//            } else {
+//                i++;
+//                JOptionPane.showMessageDialog(this, "Username and Password did not match", "Warning", JOptionPane.WARNING_MESSAGE);
+//                if (i == 3) {
+//                    int reply = JOptionPane.showConfirmDialog(this, "<html>You have reached the maximum number if errors<br>Do you wish to try again??</html>", "Confirmation message", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+//                    if (reply == JOptionPane.YES_OPTION) {
+//                        txt_userName.setText(null);
+//                        txt_password.setText(null);
+//                        i=0;
+//                    } else if (reply == JOptionPane.NO_OPTION) {
+//                        this.dispose();
+//                    }
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }//GEN-LAST:event_signInActionPerformed
+
     private void txt_userNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_userNameFocusLost
         if (txt_userName.getText().isEmpty()) {
             System.err.println("Username is Empty !");
@@ -253,22 +206,16 @@ public class Login extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
-
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -292,6 +239,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txt_userName;
     private javax.swing.JLabel woodyPad;
     // End of variables declaration//GEN-END:variables
-    int i = 0;
-    String loginStatus;
+//    int i = 0;
 }
