@@ -64,6 +64,7 @@ public class waiterAdd extends javax.swing.JFrame {
         setUndecorated(true);
 
         txtnic.setBackground(new java.awt.Color(247, 247, 247));
+        txtnic.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtnic.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtnic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
