@@ -54,6 +54,22 @@ public class ControlPanel1 extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         ControlPanel = new javax.swing.JLayeredPane();
+        changeAccPic = new javax.swing.JLayeredPane();
+        jDesktopPane4 = new javax.swing.JDesktopPane();
+        image3 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        userpicChange = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jButton22 = new javax.swing.JButton();
+        otherAccounts = new javax.swing.JLayeredPane();
+        jDesktopPane5 = new javax.swing.JDesktopPane();
+        userPIc = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton15 = new javax.swing.JButton();
+        jButton19 = new javax.swing.JButton();
+        jButton24 = new javax.swing.JButton();
         UserAccounts = new javax.swing.JLayeredPane();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         image = new javax.swing.JLabel();
@@ -69,13 +85,6 @@ public class ControlPanel1 extends javax.swing.JFrame {
         jButton16 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
-        otherAccounts = new javax.swing.JLayeredPane();
-        jDesktopPane5 = new javax.swing.JDesktopPane();
-        userPIc = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton15 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
         promotionDemot = new javax.swing.JLayeredPane();
         combo_type = new javax.swing.JComboBox();
         promote = new javax.swing.JLayeredPane();
@@ -147,14 +156,6 @@ public class ControlPanel1 extends javax.swing.JFrame {
         green = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton27 = new javax.swing.JButton();
-        changeAccPic = new javax.swing.JLayeredPane();
-        jDesktopPane4 = new javax.swing.JDesktopPane();
-        image3 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        userpicChange = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jButton22 = new javax.swing.JButton();
         changeUserName = new javax.swing.JLayeredPane();
         txt_userName = new javax.swing.JTextField();
         jDesktopPane2 = new javax.swing.JDesktopPane();
@@ -169,6 +170,121 @@ public class ControlPanel1 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+
+        image3.setBounds(0, 0, 240, 200);
+        jDesktopPane4.add(image3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jDesktopPane4.setBounds(800, 230, 240, 200);
+        changeAccPic.add(jDesktopPane4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton8.setText("Browse");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        jButton8.setBounds(860, 450, 130, 40);
+        changeAccPic.add(jButton8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/done_d.png"))); // NOI18N
+        jButton9.setContentAreaFilled(false);
+        jButton9.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/doneg1.png"))); // NOI18N
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        jButton9.setBounds(460, 360, 230, 80);
+        changeAccPic.add(jButton9, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        userpicChange.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        userpicChange.setBounds(230, 210, 450, 30);
+        changeAccPic.add(userpicChange, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userNameChange.png"))); // NOI18N
+        jLabel8.setBounds(0, 0, 1366, 768);
+        changeAccPic.add(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/home.png"))); // NOI18N
+        jButton22.setContentAreaFilled(false);
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton22ActionPerformed(evt);
+            }
+        });
+        jButton22.setBounds(1199, 0, 170, 70);
+        changeAccPic.add(jButton22, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        changeAccPic.setBounds(0, 0, 1366, 768);
+        ControlPanel.add(changeAccPic, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        userPIc.setBounds(0, 0, 220, 200);
+        jDesktopPane5.add(userPIc, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jDesktopPane5.setBounds(340, 140, 220, 200);
+        otherAccounts.add(jDesktopPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jTable1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "User Accounts", "User Type"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        jScrollPane2.setBounds(690, 140, 450, 440);
+        otherAccounts.add(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/pro.png"))); // NOI18N
+        jButton15.setContentAreaFilled(false);
+        jButton15.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userAccountsg.png"))); // NOI18N
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+        jButton15.setBounds(280, 390, 340, 110);
+        otherAccounts.add(jButton15, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/delete.png"))); // NOI18N
+        jButton19.setContentAreaFilled(false);
+        jButton19.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/delete_glow.png"))); // NOI18N
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
+        jButton19.setBounds(240, 540, 410, 100);
+        otherAccounts.add(jButton19, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/home.png"))); // NOI18N
+        jButton24.setContentAreaFilled(false);
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
+            }
+        });
+        jButton24.setBounds(1199, 0, 170, 70);
+        otherAccounts.add(jButton24, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        otherAccounts.setBounds(0, 0, 1366, 768);
+        ControlPanel.add(otherAccounts, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         image.setBounds(0, 0, 220, 200);
         jDesktopPane1.add(image, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -282,64 +398,6 @@ public class ControlPanel1 extends javax.swing.JFrame {
 
         controlHome.setBounds(0, 0, 1366, 768);
         ControlPanel.add(controlHome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        userPIc.setBounds(30, 30, 190, 170);
-        jDesktopPane5.add(userPIc, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jDesktopPane5.setBounds(340, 140, 220, 200);
-        otherAccounts.add(jDesktopPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jTable1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "User Accounts", "User Type"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jTable1);
-
-        jScrollPane2.setBounds(690, 140, 450, 440);
-        otherAccounts.add(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/pro.png"))); // NOI18N
-        jButton15.setContentAreaFilled(false);
-        jButton15.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userAccountsg.png"))); // NOI18N
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
-            }
-        });
-        jButton15.setBounds(280, 390, 340, 110);
-        otherAccounts.add(jButton15, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/delete.png"))); // NOI18N
-        jButton19.setContentAreaFilled(false);
-        jButton19.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/delete_glow.png"))); // NOI18N
-        jButton19.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton19ActionPerformed(evt);
-            }
-        });
-        jButton19.setBounds(240, 540, 410, 100);
-        otherAccounts.add(jButton19, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        otherAccounts.setBounds(0, 0, 1366, 768);
-        ControlPanel.add(otherAccounts, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         combo_type.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         combo_type.setForeground(new java.awt.Color(204, 0, 204));
@@ -840,53 +898,6 @@ public class ControlPanel1 extends javax.swing.JFrame {
 
         changePassword.setBounds(0, 0, 1366, 768);
         ControlPanel.add(changePassword, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        image3.setBounds(0, 0, 250, 230);
-        jDesktopPane4.add(image3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jDesktopPane4.setBounds(800, 200, 250, 230);
-        changeAccPic.add(jDesktopPane4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton8.setText("Browse");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-        jButton8.setBounds(860, 450, 130, 40);
-        changeAccPic.add(jButton8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/done_d.png"))); // NOI18N
-        jButton9.setContentAreaFilled(false);
-        jButton9.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/doneg1.png"))); // NOI18N
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-        jButton9.setBounds(460, 360, 230, 80);
-        changeAccPic.add(jButton9, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        userpicChange.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        userpicChange.setBounds(230, 210, 450, 30);
-        changeAccPic.add(userpicChange, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/userNameChange.png"))); // NOI18N
-        jLabel8.setBounds(0, 0, 1366, 768);
-        changeAccPic.add(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jButton22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images_controlPanel/home.png"))); // NOI18N
-        jButton22.setContentAreaFilled(false);
-        jButton22.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton22ActionPerformed(evt);
-            }
-        });
-        jButton22.setBounds(1199, 0, 170, 70);
-        changeAccPic.add(jButton22, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        changeAccPic.setBounds(0, 0, 1366, 768);
-        ControlPanel.add(changeAccPic, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txt_userName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txt_userName.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -1521,6 +1532,11 @@ public class ControlPanel1 extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+         controlHome.setVisible(true);
+         otherAccounts.setVisible(false);
+    }//GEN-LAST:event_jButton24ActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -1595,6 +1611,7 @@ public class ControlPanel1 extends javax.swing.JFrame {
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton27;
